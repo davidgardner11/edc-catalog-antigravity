@@ -1,0 +1,700 @@
+[
+  {
+    "id": "goruck-gr1",
+    "brand": "GORUCK",
+    "name": "GR1 21L",
+    "capacityLiters": 21,
+    "lowestPriceUSD": 345,
+    "primaryRetailer": "GORUCK",
+    "review": {
+      "score": 4.9,
+      "maxScore": 5.0,
+      "sourceName": "Verified Buyers",
+      "reviewCount": 1840
+    },
+    "colorways": [
+      { "name": "Black", "hex": "#1a1a1a" },
+      { "name": "Coyote Brown", "hex": "#81613c" },
+      { "name": "Ranger Green", "hex": "#40523e" },
+      { "name": "Multicam Black", "hex": "#2c2f33" },
+      { "name": "Java", "hex": "#5c4033" },
+      { "name": "Navy Blue", "hex": "#1b2838" },
+      { "name": "Steel Grey", "hex": "#4a5568" },
+      { "name": "Wolf Grey", "hex": "#718096" },
+      { "name": "Tropic Camo", "hex": "#3d4839" },
+      { "name": "Desert Digital", "hex": "#b8976c" },
+      { "name": "Armor Grey", "hex": "#58626c" },
+      { "name": "Dark Oak", "hex": "#4a3525" }
+    ],
+    "images": [
+      "/images/backpacks/goruck-gr1/1.webp",
+      "/images/backpacks/goruck-gr1/2.webp",
+      "/images/backpacks/goruck-gr1/3.webp",
+      "/images/backpacks/goruck-gr1/4.webp",
+      "/images/backpacks/goruck-gr1/5.webp"
+    ],
+    "material": "1000D Cordura Nylon",
+    "dimensions": "11.5\"W x 20\"H x 6.75\"D",
+    "weightKg": 1.45,
+    "description": "The quintessential bombproof EDC pack built with military-grade 1000D Cordura and bombproof laptop compartment."
+  },
+  {
+    "id": "peak-design-everyday",
+    "brand": "Peak Design",
+    "name": "Everyday Backpack 20L V2",
+    "capacityLiters": 20,
+    "lowestPriceUSD": 279,
+    "primaryRetailer": "Peak Design",
+    "review": {
+      "score": 4.8,
+      "maxScore": 5.0,
+      "sourceName": "Carryology",
+      "reviewCount": 940
+    },
+    "colorways": [
+      { "name": "Black", "hex": "#171717" },
+      { "name": "Charcoal", "hex": "#374151" },
+      { "name": "Ash Grey", "hex": "#9ca3af" },
+      { "name": "Midnight Blue", "hex": "#1e3a8a" },
+      { "name": "Bone Off-White", "hex": "#e5e5e5" }
+    ],
+    "images": [
+      "/images/backpacks/peak-design-everyday/1.webp",
+      "/images/backpacks/peak-design-everyday/2.webp",
+      "/images/backpacks/peak-design-everyday/3.webp",
+      "/images/backpacks/peak-design-everyday/4.webp",
+      "/images/backpacks/peak-design-everyday/5.webp"
+    ],
+    "material": "400D Recycled Nylon Canvas",
+    "dimensions": "11.8\"W x 18.3\"H x 8.3\"D",
+    "weightKg": 1.54,
+    "description": "An iconic award-winning pack featuring MagLatch hardware, dual side access, and customizable FlexFold dividers."
+  },
+  {
+    "id": "aer-city-pack-pro",
+    "brand": "Aer",
+    "name": "City Pack Pro",
+    "capacityLiters": 24,
+    "lowestPriceUSD": 219,
+    "primaryRetailer": "Aer SF",
+    "review": {
+      "score": 9.3,
+      "maxScore": 10.0,
+      "sourceName": "Pack Hacker",
+      "reviewCount": 420
+    },
+    "colorways": [
+      { "name": "Black Cordura", "hex": "#111827" },
+      { "name": "X-Pac Black", "hex": "#0f172a" },
+      { "name": "Olive Green", "hex": "#3f4a3c" },
+      { "name": "Navy Blue", "hex": "#1e293b" },
+      { "name": "Heather Gray", "hex": "#64748b" },
+      { "name": "Coyote Brown", "hex": "#785637" }
+    ],
+    "images": [
+      "/images/backpacks/aer-city-pack-pro/1.webp",
+      "/images/backpacks/aer-city-pack-pro/2.webp",
+      "/images/backpacks/aer-city-pack-pro/3.webp",
+      "/images/backpacks/aer-city-pack-pro/4.webp",
+      "/images/backpacks/aer-city-pack-pro/5.webp"
+    ],
+    "material": "1680D Cordura Ballistic Nylon",
+    "dimensions": "12\"W x 18\"H x 7.5\"D",
+    "weightKg": 1.18,
+    "description": "Streamlined urban everyday carry bag offering lay-flat clamshell access, smart tech organization, and superior comfort."
+  },
+  {
+    "id": "mystery-ranch-urban-assault-21",
+    "brand": "Mystery Ranch",
+    "name": "Urban Assault 21",
+    "capacityLiters": 21,
+    "lowestPriceUSD": 149,
+    "primaryRetailer": "Mystery Ranch",
+    "review": {
+      "score": 4.7,
+      "maxScore": 5.0,
+      "sourceName": "OutdoorsGearLab",
+      "reviewCount": 612
+    },
+    "colorways": [
+      { "name": "Black", "hex": "#18181b" },
+      { "name": "Wood Waxed", "hex": "#604734" },
+      { "name": "Shadow 1000D", "hex": "#334155" },
+      { "name": "Forest Green", "hex": "#28442f" },
+      { "name": "Coyote", "hex": "#92734a" },
+      { "name": "Hummus", "hex": "#c4a47c" },
+      { "name": "Lemon Teal", "hex": "#0d9488" },
+      { "name": "Wildfire Black", "hex": "#09090b" },
+      { "name": "Galaxy Navy", "hex": "#172554" },
+      { "name": "Splash Orange", "hex": "#ea580c" }
+    ],
+    "images": [
+      "/images/backpacks/mystery-ranch-urban-assault-21/1.webp",
+      "/images/backpacks/mystery-ranch-urban-assault-21/2.webp",
+      "/images/backpacks/mystery-ranch-urban-assault-21/3.webp",
+      "/images/backpacks/mystery-ranch-urban-assault-21/4.webp",
+      "/images/backpacks/mystery-ranch-urban-assault-21/5.webp"
+    ],
+    "material": "500D Cordura Fabric",
+    "dimensions": "10\"W x 20.25\"H x 9\"D",
+    "weightKg": 1.27,
+    "description": "Features Mystery Ranch's signature 3-ZIP design for instant total access to all your gear."
+  },
+  {
+    "id": "evergoods-cpl24",
+    "brand": "Evergoods",
+    "name": "Civic Panel Loader 24L",
+    "capacityLiters": 24,
+    "lowestPriceUSD": 279,
+    "primaryRetailer": "Evergoods",
+    "review": {
+      "score": 9.5,
+      "maxScore": 10.0,
+      "sourceName": "Carryology Best EDC",
+      "reviewCount": 780
+    },
+    "colorways": [
+      { "name": "Signal Blue", "hex": "#0284c7" },
+      { "name": "Black 840D", "hex": "#0f172a" },
+      { "name": "Burnt Orange", "hex": "#c2410c" },
+      { "name": "Dark Khaki", "hex": "#716040" },
+      { "name": "Olive", "hex": "#3d4b38" },
+      { "name": "Navy Blue", "hex": "#1e3a5f" }
+    ],
+    "images": [
+      "/images/backpacks/evergoods-cpl24/1.webp",
+      "/images/backpacks/evergoods-cpl24/2.webp",
+      "/images/backpacks/evergoods-cpl24/3.webp",
+      "/images/backpacks/evergoods-cpl24/4.webp",
+      "/images/backpacks/evergoods-cpl24/5.webp"
+    ],
+    "material": "Custom 840D Ballistic Nylon",
+    "dimensions": "11.5\"W x 18\"H x 7.5\"D",
+    "weightKg": 1.27,
+    "description": "Ergonomically supreme crossover everyday panel loader with dedicated laptop compartment and top front pockets."
+  },
+  {
+    "id": "bellroy-transit-workpack",
+    "brand": "Bellroy",
+    "name": "Transit Workpack 20L",
+    "capacityLiters": 20,
+    "lowestPriceUSD": 199,
+    "primaryRetailer": "Bellroy",
+    "review": {
+      "score": 4.6,
+      "maxScore": 5.0,
+      "sourceName": "EverydayCarry.com",
+      "reviewCount": 510
+    },
+    "colorways": [
+      { "name": "Midnight Black", "hex": "#1c1917" },
+      { "name": "Ranger Green", "hex": "#36453b" },
+      { "name": "Lunar Blue", "hex": "#334155" },
+      { "name": "Bronze", "hex": "#8c6239" },
+      { "name": "Slate Grey", "hex": "#64748b" },
+      { "name": "Olive", "hex": "#4d5d47" },
+      { "name": "Terracotta", "hex": "#9a3412" }
+    ],
+    "images": [
+      "/images/backpacks/bellroy-transit-workpack/1.webp",
+      "/images/backpacks/bellroy-transit-workpack/2.webp",
+      "/images/backpacks/bellroy-transit-workpack/3.webp",
+      "/images/backpacks/bellroy-transit-workpack/4.webp",
+      "/images/backpacks/bellroy-transit-workpack/5.webp"
+    ],
+    "material": "Water-Resistant Recycled Woven Fabric",
+    "dimensions": "11.8\"W x 19.7\"H x 5.9\"D",
+    "weightKg": 0.85,
+    "description": "Sleek work-to-weekend bag with hidden external side zip pockets, contoured back harness, and padded laptop sleeve."
+  },
+  {
+    "id": "tom-bihn-synik-22",
+    "brand": "Tom Bihn",
+    "name": "Synik 22",
+    "capacityLiters": 22,
+    "lowestPriceUSD": 340,
+    "primaryRetailer": "Tom Bihn",
+    "review": {
+      "score": 9.6,
+      "maxScore": 10.0,
+      "sourceName": "The Prepared",
+      "reviewCount": 1120
+    },
+    "colorways": [
+      { "name": "Deep Blue", "hex": "#1e3a8a" },
+      { "name": "Ursa Brown", "hex": "#451a03" },
+      { "name": "Nebulous Grey", "hex": "#4b5563" },
+      { "name": "Burnt Orange", "hex": "#d97706" },
+      { "name": "Taiga Green", "hex": "#14532d" },
+      { "name": "Wasabi", "hex": "#84cc16" },
+      { "name": "Aubergine", "hex": "#581c87" },
+      { "name": "Black Ballistic", "hex": "#09090b" },
+      { "name": "Northwest Sky", "hex": "#38bdf8" },
+      { "name": "Mars Red", "hex": "#dc2626" },
+      { "name": "Island Coral", "hex": "#f43f5e" },
+      { "name": "Cloud Grey", "hex": "#cbd5e1" },
+      { "name": "Coyote", "hex": "#a16207" },
+      { "name": "Verde", "hex": "#16a34a" }
+    ],
+    "images": [
+      "/images/backpacks/tom-bihn-synik-22/1.webp",
+      "/images/backpacks/tom-bihn-synik-22/2.webp",
+      "/images/backpacks/tom-bihn-synik-22/3.webp",
+      "/images/backpacks/tom-bihn-synik-22/4.webp",
+      "/images/backpacks/tom-bihn-synik-22/5.webp"
+    ],
+    "material": "525D High Tenacity Ballistic Nylon",
+    "dimensions": "11.4\"W x 16\"H x 7.5\"D",
+    "weightKg": 1.15,
+    "description": "Full clamshell opening with an integrated internal frame, dual laptop access, and legendary pocket ergonomics."
+  },
+  {
+    "id": "able-carry-daily-plus",
+    "brand": "Able Carry",
+    "name": "Daily Plus",
+    "capacityLiters": 21,
+    "lowestPriceUSD": 198,
+    "primaryRetailer": "Able Carry",
+    "review": {
+      "score": 4.8,
+      "maxScore": 5.0,
+      "sourceName": "Gear Patrol",
+      "reviewCount": 380
+    },
+    "colorways": [
+      { "name": "Castine Olive", "hex": "#4d5b41" },
+      { "name": "Black X-Pac", "hex": "#111827" },
+      { "name": "Deep Navy", "hex": "#1e293b" },
+      { "name": "Coyote X-Pac", "hex": "#855a30" },
+      { "name": "Black Cordura", "hex": "#1f2937" }
+    ],
+    "images": [
+      "/images/backpacks/able-carry-daily-plus/1.webp",
+      "/images/backpacks/able-carry-daily-plus/2.webp",
+      "/images/backpacks/able-carry-daily-plus/3.webp",
+      "/images/backpacks/able-carry-daily-plus/4.webp",
+      "/images/backpacks/able-carry-daily-plus/5.webp"
+    ],
+    "material": "Dimension-Polyant X-Pac VX21",
+    "dimensions": "11.4\"W x 19.3\"H x 7.5\"D",
+    "weightKg": 1.21,
+    "description": "Engineered with an A-Frame suspension system that distributes weight upwards, minimizing strain on shoulders."
+  },
+  {
+    "id": "black-ember-citadel-r3",
+    "brand": "Black Ember",
+    "name": "Citadel R3",
+    "capacityLiters": 25,
+    "lowestPriceUSD": 275,
+    "primaryRetailer": "Black Ember",
+    "review": {
+      "score": 9.1,
+      "maxScore": 10.0,
+      "sourceName": "Wired EDC Review",
+      "reviewCount": 290
+    },
+    "colorways": [
+      { "name": "Stealth Black", "hex": "#09090b" },
+      { "name": "Jet Grey", "hex": "#374151" },
+      { "name": "Matte Olive", "hex": "#36453b" }
+    ],
+    "images": [
+      "/images/backpacks/black-ember-citadel-r3/1.webp",
+      "/images/backpacks/black-ember-citadel-r3/2.webp",
+      "/images/backpacks/black-ember-citadel-r3/3.webp",
+      "/images/backpacks/black-ember-citadel-r3/4.webp",
+      "/images/backpacks/black-ember-citadel-r3/5.webp"
+    ],
+    "material": "Microhex 800D Cordura (IPX-6 Waterproof)",
+    "dimensions": "12.5\"W x 19.5\"H x 6.5\"D",
+    "weightKg": 1.36,
+    "description": "High-tech minimalist backpack engineered with waterproof bonding techniques and laser-cut Hypalon details."
+  },
+  {
+    "id": "patagonia-black-hole-25l",
+    "brand": "Patagonia",
+    "name": "Black Hole Pack 25L",
+    "capacityLiters": 25,
+    "lowestPriceUSD": 149,
+    "primaryRetailer": "Patagonia / REI",
+    "review": {
+      "score": 4.7,
+      "maxScore": 5.0,
+      "sourceName": "REI Customer Reviews",
+      "reviewCount": 2150
+    },
+    "colorways": [
+      { "name": "Pitch Blue", "hex": "#1e3a8a" },
+      { "name": "Wax Red", "hex": "#b91c1c" },
+      { "name": "Golden Caramel", "hex": "#d97706" },
+      { "name": "Smolder Blue", "hex": "#334155" },
+      { "name": "Sage Khaki", "hex": "#78716c" },
+      { "name": "Black Gloss", "hex": "#0a0a0a" },
+      { "name": "Surf Yellow", "hex": "#eab308" },
+      { "name": "Basin Green", "hex": "#15803d" },
+      { "name": "Tourmaline", "hex": "#06b6d4" },
+      { "name": "Forge Grey", "hex": "#475569" },
+      { "name": "Plum Dark", "hex": "#701a75" }
+    ],
+    "images": [
+      "/images/backpacks/patagonia-black-hole-25l/1.webp",
+      "/images/backpacks/patagonia-black-hole-25l/2.webp",
+      "/images/backpacks/patagonia-black-hole-25l/3.webp",
+      "/images/backpacks/patagonia-black-hole-25l/4.webp",
+      "/images/backpacks/patagonia-black-hole-25l/5.webp"
+    ],
+    "material": "100% Recycled Polyester Ripstop TPU",
+    "dimensions": "11.8\"W x 22\"H x 5.9\"D",
+    "weightKg": 0.65,
+    "description": "Ultra-durable, weather-resistant everyday workhorse made from 100% recycled polyester with a sleek matte finish."
+  },
+  {
+    "id": "the-north-face-borealis",
+    "brand": "The North Face",
+    "name": "Borealis Classic 28L",
+    "capacityLiters": 28,
+    "lowestPriceUSD": 99,
+    "primaryRetailer": "The North Face",
+    "review": {
+      "score": 4.6,
+      "maxScore": 5.0,
+      "sourceName": "Amazon Reviews",
+      "reviewCount": 4600
+    },
+    "colorways": [
+      { "name": "TNF Black", "hex": "#171717" },
+      { "name": "Asphalt Grey", "hex": "#374151" },
+      { "name": "Summit Gold", "hex": "#eab308" },
+      { "name": "Monterey Blue", "hex": "#1d4ed8" },
+      { "name": "Wasabi Green", "hex": "#65a30d" },
+      { "name": "Gardenia White", "hex": "#f5f5f4" },
+      { "name": "Pine Needle", "hex": "#14532d" },
+      { "name": "Timber Tan", "hex": "#a16207" },
+      { "name": "Shady Blue", "hex": "#0284c7" },
+      { "name": "Wild Ginger", "hex": "#c2410c" },
+      { "name": "New Taupe", "hex": "#57534e" },
+      { "name": "Retro Orange", "hex": "#f97316" },
+      { "name": "Cordovan", "hex": "#831843" },
+      { "name": "Dark Sage", "hex": "#3f6212" },
+      { "name": "Military Olive", "hex": "#365314" },
+      { "name": "Beta Camo", "hex": "#292524" }
+    ],
+    "images": [
+      "/images/backpacks/the-north-face-borealis/1.webp",
+      "/images/backpacks/the-north-face-borealis/2.webp",
+      "/images/backpacks/the-north-face-borealis/3.webp",
+      "/images/backpacks/the-north-face-borealis/4.webp",
+      "/images/backpacks/the-north-face-borealis/5.webp"
+    ],
+    "material": "210D Recycled Nylon Ripstop",
+    "dimensions": "12\"W x 19.5\"H x 6.5\"D",
+    "weightKg": 1.05,
+    "description": "Beloved campus and commuter favorite featuring the FlexVent suspension system and external bungee storage."
+  },
+  {
+    "id": "osprey-daylite-plus",
+    "brand": "Osprey",
+    "name": "Daylite Plus 20L",
+    "capacityLiters": 20,
+    "lowestPriceUSD": 75,
+    "primaryRetailer": "Osprey / REI",
+    "review": {
+      "score": 4.8,
+      "maxScore": 5.0,
+      "sourceName": "REI Customer Reviews",
+      "reviewCount": 3120
+    },
+    "colorways": [
+      { "name": "Wave Blue", "hex": "#0284c7" },
+      { "name": "Black", "hex": "#18181b" },
+      { "name": "Tunnel Grey", "hex": "#4b5563" },
+      { "name": "Petrol Blue", "hex": "#0f766e" },
+      { "name": "Dream Purple", "hex": "#7e22ce" },
+      { "name": "Cascade Blue", "hex": "#0369a1" },
+      { "name": "Lemongrass", "hex": "#a3e635" },
+      { "name": "Kakio Olive", "hex": "#3f4a3c" },
+      { "name": "Alpinism Orange", "hex": "#f97316" },
+      { "name": "Earth Brown", "hex": "#78350f" },
+      { "name": "Mars Red", "hex": "#dc2626" },
+      { "name": "Tan Camo", "hex": "#a8a29e" }
+    ],
+    "images": [
+      "/images/backpacks/osprey-daylite-plus/1.webp",
+      "/images/backpacks/osprey-daylite-plus/2.webp",
+      "/images/backpacks/osprey-daylite-plus/3.webp",
+      "/images/backpacks/osprey-daylite-plus/4.webp",
+      "/images/backpacks/osprey-daylite-plus/5.webp"
+    ],
+    "material": "300D Recycled PET Packcloth",
+    "dimensions": "11\"W x 19\"H x 9.5\"D",
+    "weightKg": 0.59,
+    "description": "Featherweight everyday companion with front shove-it pocket, dual stretch water bottle pockets, and harness stash pocket."
+  },
+  {
+    "id": "wandrd-prvke-21",
+    "brand": "Wandrd",
+    "name": "PRVKE 21L V3",
+    "capacityLiters": 21,
+    "lowestPriceUSD": 219,
+    "primaryRetailer": "Wandrd",
+    "review": {
+      "score": 9.0,
+      "maxScore": 10.0,
+      "sourceName": "Carryology",
+      "reviewCount": 850
+    },
+    "colorways": [
+      { "name": "Aegean Blue", "hex": "#0e7490" },
+      { "name": "Wasatch Green", "hex": "#15803d" },
+      { "name": "Sedona Orange", "hex": "#ea580c" },
+      { "name": "Yuma Tan", "hex": "#b45309" },
+      { "name": "Deep Black", "hex": "#111827" },
+      { "name": "Slate Blue", "hex": "#475569" },
+      { "name": "Olive Night", "hex": "#365314" }
+    ],
+    "images": [
+      "/images/backpacks/wandrd-prvke-21/1.webp",
+      "/images/backpacks/wandrd-prvke-21/2.webp",
+      "/images/backpacks/wandrd-prvke-21/3.webp",
+      "/images/backpacks/wandrd-prvke-21/4.webp",
+      "/images/backpacks/wandrd-prvke-21/5.webp"
+    ],
+    "material": "Waterproof Tarpaulin & 1680D Ballistic Nylon",
+    "dimensions": "11\"W x 19\"H x 6.5\"D",
+    "weightKg": 1.3,
+    "description": "Photographer-friendly rolltop everyday bag with magnetic tote handles, quick-draw side camera access, and weather-sealed zippers."
+  },
+  {
+    "id": "alpaka-elements-pro",
+    "brand": "Alpaka",
+    "name": "Elements Backpack Pro",
+    "capacityLiters": 26,
+    "lowestPriceUSD": 169,
+    "primaryRetailer": "Alpaka Gear",
+    "review": {
+      "score": 8.8,
+      "maxScore": 10.0,
+      "sourceName": "Pack Hacker",
+      "reviewCount": 310
+    },
+    "colorways": [
+      { "name": "Dark Green Axoflux", "hex": "#1b4332" },
+      { "name": "Jet Black X-Pac", "hex": "#0f172a" },
+      { "name": "Olive Green", "hex": "#4d5b41" },
+      { "name": "Slate Grey", "hex": "#64748b" },
+      { "name": "Dark Sand", "hex": "#a38260" },
+      { "name": "Electric Orange", "hex": "#f97316" }
+    ],
+    "images": [
+      "/images/backpacks/alpaka-elements-pro/1.webp",
+      "/images/backpacks/alpaka-elements-pro/2.webp",
+      "/images/backpacks/alpaka-elements-pro/3.webp",
+      "/images/backpacks/alpaka-elements-pro/4.webp",
+      "/images/backpacks/alpaka-elements-pro/5.webp"
+    ],
+    "material": "Axoflux Recycled Fabric 210D",
+    "dimensions": "12.2\"W x 18.9\"H x 7.1\"D",
+    "weightKg": 1.15,
+    "description": "Engineered for tech enthusiasts with smart magnetic Fidlock buckles, suspended 16-inch laptop compartment, and weatherproof fabric."
+  },
+  {
+    "id": "boundary-supply-errant",
+    "brand": "Boundary Supply",
+    "name": "Errant Pack",
+    "capacityLiters": 22,
+    "lowestPriceUSD": 219,
+    "primaryRetailer": "Boundary Supply",
+    "review": {
+      "score": 4.5,
+      "maxScore": 5.0,
+      "sourceName": "Chase Reeves",
+      "reviewCount": 420
+    },
+    "colorways": [
+      { "name": "Obsidian Black", "hex": "#18181b" },
+      { "name": "Cobalt Blue", "hex": "#1d4ed8" },
+      { "name": "Arid Tan", "hex": "#a16207" },
+      { "name": "Granite Grey", "hex": "#4b5563" },
+      { "name": "Woodland Green", "hex": "#166534" }
+    ],
+    "images": [
+      "/images/backpacks/boundary-supply-errant/1.webp",
+      "/images/backpacks/boundary-supply-errant/2.webp",
+      "/images/backpacks/boundary-supply-errant/3.webp",
+      "/images/backpacks/boundary-supply-errant/4.webp",
+      "/images/backpacks/boundary-supply-errant/5.webp"
+    ],
+    "material": "500D Kodra with Barricade DWR",
+    "dimensions": "11.5\"W x 19\"H x 5.5\"D",
+    "weightKg": 1.42,
+    "description": "Modular urban everyday carry system featuring magnetic auto-locking closures and stormproof zippered compartments."
+  },
+  {
+    "id": "chrome-industries-barrage",
+    "brand": "Chrome Industries",
+    "name": "Barrage Cargo 22L",
+    "capacityLiters": 22,
+    "lowestPriceUSD": 180,
+    "primaryRetailer": "Chrome Industries",
+    "review": {
+      "score": 8.7,
+      "maxScore": 10.0,
+      "sourceName": "Bicycle Nomad",
+      "reviewCount": 540
+    },
+    "colorways": [
+      { "name": "All Black", "hex": "#09090b" },
+      { "name": "Night Reflective", "hex": "#334155" },
+      { "name": "Ranger Green", "hex": "#3f4a3c" },
+      { "name": "Smoke Grey", "hex": "#6b7280" },
+      { "name": "Brick Red", "hex": "#991b1b" },
+      { "name": "Royal Blue", "hex": "#1e40af" }
+    ],
+    "images": [
+      "/images/backpacks/chrome-industries-barrage/1.webp",
+      "/images/backpacks/chrome-industries-barrage/2.webp",
+      "/images/backpacks/chrome-industries-barrage/3.webp",
+      "/images/backpacks/chrome-industries-barrage/4.webp",
+      "/images/backpacks/chrome-industries-barrage/5.webp"
+    ],
+    "material": "1050D Nylon with 500D TPE Tarp Liner",
+    "dimensions": "12\"W x 20\"H x 6\"D",
+    "weightKg": 1.5,
+    "description": "100% welded waterproof rolltop backpack with an adjustable external cargo net for carrying helmets, shoes, or jacket."
+  },
+  {
+    "id": "timbuk2-authority-deluxe",
+    "brand": "Timbuk2",
+    "name": "Authority Laptop Backpack Deluxe",
+    "capacityLiters": 28,
+    "lowestPriceUSD": 159,
+    "primaryRetailer": "Timbuk2",
+    "review": {
+      "score": 4.5,
+      "maxScore": 5.0,
+      "sourceName": "PCMag Editor's Choice",
+      "reviewCount": 1420
+    },
+    "colorways": [
+      { "name": "Eco Black", "hex": "#171717" },
+      { "name": "Titanium Grey", "hex": "#4b5563" },
+      { "name": "Moss Green", "hex": "#4d5b41" },
+      { "name": "Night Camo", "hex": "#27272a" },
+      { "name": "Jet Black Coated", "hex": "#09090b" },
+      { "name": "Utility Navy", "hex": "#1e293b" }
+    ],
+    "images": [
+      "/images/backpacks/timbuk2-authority-deluxe/1.webp",
+      "/images/backpacks/timbuk2-authority-deluxe/2.webp",
+      "/images/backpacks/timbuk2-authority-deluxe/3.webp",
+      "/images/backpacks/timbuk2-authority-deluxe/4.webp",
+      "/images/backpacks/timbuk2-authority-deluxe/5.webp"
+    ],
+    "material": "630D Oxford Nylon",
+    "dimensions": "11.4\"W x 18.1\"H x 5.9\"D",
+    "weightKg": 1.1,
+    "description": "Master of tech organization with dedicated rear-access 17\" laptop compartment and compression straps for a low-profile silhouette."
+  },
+  {
+    "id": "matador-seg28",
+    "brand": "Matador",
+    "name": "SEG28 Everyday Max",
+    "capacityLiters": 28,
+    "lowestPriceUSD": 250,
+    "primaryRetailer": "Matador",
+    "review": {
+      "score": 9.2,
+      "maxScore": 10.0,
+      "sourceName": "Carryology",
+      "reviewCount": 360
+    },
+    "colorways": [
+      { "name": "Charcoal Grey", "hex": "#374151" },
+      { "name": "Arctic White", "hex": "#e5e5e5" },
+      { "name": "Stealth Black", "hex": "#18181b" }
+    ],
+    "images": [
+      "/images/backpacks/matador-seg28/1.webp",
+      "/images/backpacks/matador-seg28/2.webp",
+      "/images/backpacks/matador-seg28/3.webp",
+      "/images/backpacks/matador-seg28/4.webp",
+      "/images/backpacks/matador-seg28/5.webp"
+    ],
+    "material": "420D Nylon with UTS Waterproof Coating",
+    "dimensions": "12\"W x 20\"H x 9.5\"D",
+    "weightKg": 0.98,
+    "description": "Features segmented external organization pockets with clamshell access, combining duffel utility with backpack mobility."
+  },
+  {
+    "id": "fjallraven-raven-20",
+    "brand": "Fjällräven",
+    "name": "Räven 20L",
+    "capacityLiters": 20,
+    "lowestPriceUSD": 110,
+    "primaryRetailer": "Fjällräven",
+    "review": {
+      "score": 4.7,
+      "maxScore": 5.0,
+      "sourceName": "Nordic Outdoor Review",
+      "reviewCount": 980
+    },
+    "colorways": [
+      { "name": "Deep Forest", "hex": "#2d3a2e" },
+      { "name": "Ochre Yellow", "hex": "#ca8a04" },
+      { "name": "Basalt Grey", "hex": "#4b5563" },
+      { "name": "Navy Blue", "hex": "#1e3a8a" },
+      { "name": "Terracotta", "hex": "#9a3412" },
+      { "name": "Foliage Green", "hex": "#3f6212" },
+      { "name": "Cabin Red", "hex": "#991b1b" },
+      { "name": "Dusk Black", "hex": "#1c1917" }
+    ],
+    "images": [
+      "/images/backpacks/fjallraven-raven-20/1.webp",
+      "/images/backpacks/fjallraven-raven-20/2.webp",
+      "/images/backpacks/fjallraven-raven-20/3.webp",
+      "/images/backpacks/fjallraven-raven-20/4.webp",
+      "/images/backpacks/fjallraven-raven-20/5.webp"
+    ],
+    "material": "G-1000 HeavyDuty Eco (65% Polyester, 35% Cotton)",
+    "dimensions": "11\"W x 16.5\"H x 6.1\"D",
+    "weightKg": 0.65,
+    "description": "Simple, practical, and long-lasting everyday backpack in waxed G-1000 HeavyDuty Eco with fleece-lined sunglasses pocket."
+  },
+  {
+    "id": "topo-designs-rover-classic",
+    "brand": "Topo Designs",
+    "name": "Rover Pack Classic",
+    "capacityLiters": 20,
+    "lowestPriceUSD": 99,
+    "primaryRetailer": "Topo Designs",
+    "review": {
+      "score": 4.6,
+      "maxScore": 5.0,
+      "sourceName": "Gear Junkie",
+      "reviewCount": 730
+    },
+    "colorways": [
+      { "name": "Clay Turquoise", "hex": "#06b6d4" },
+      { "name": "Navy Red", "hex": "#1e3a8a" },
+      { "name": "Forest Black", "hex": "#166534" },
+      { "name": "Mustard Olive", "hex": "#a16207" },
+      { "name": "Ballistic Black", "hex": "#09090b" },
+      { "name": "Bone White", "hex": "#f5f5f4" },
+      { "name": "Sage Green", "hex": "#65a30d" },
+      { "name": "Royal Blue", "hex": "#2563eb" },
+      { "name": "Khaki Coral", "hex": "#f43f5e" },
+      { "name": "Mountain Gold", "hex": "#eab308" }
+    ],
+    "images": [
+      "/images/backpacks/topo-designs-rover-classic/1.webp",
+      "/images/backpacks/topo-designs-rover-classic/2.webp",
+      "/images/backpacks/topo-designs-rover-classic/3.webp",
+      "/images/backpacks/topo-designs-rover-classic/4.webp",
+      "/images/backpacks/topo-designs-rover-classic/5.webp"
+    ],
+    "material": "1000D Nylon Body, 420D Packcloth",
+    "dimensions": "11\"W x 17\"H x 4.5\"D",
+    "weightKg": 0.68,
+    "description": "Iconic heritage silhouette with flap top, dual side water bottle pockets, and vibrant color-blocked styling."
+  }
+]
