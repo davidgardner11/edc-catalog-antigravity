@@ -81,6 +81,44 @@
                 </div>
               </div>
 
+              <!-- Shop At Section -->
+              <div class="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-neutral-400 block text-[10px] uppercase font-bold tracking-wider">
+                    Shop At ({{ backpack.retailers?.length || 1 }} Retailers)
+                  </span>
+                  <span class="text-[10px] text-neutral-400 font-medium">Direct Links ↗</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <a
+                    v-for="retailer in (backpack.retailers || [{ name: backpack.primaryRetailer, priceUSD: backpack.lowestPriceUSD, url: '#', isLowestPrice: true }])"
+                    :key="retailer.name"
+                    :href="retailer.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group flex items-center justify-between p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 hover:bg-neutral-100 dark:bg-neutral-800/60 dark:hover:bg-neutral-800 transition-all hover:border-neutral-300 dark:hover:border-neutral-700 cursor-pointer shadow-xs"
+                  >
+                    <div class="flex items-center gap-1.5 min-w-0">
+                      <span class="text-xs font-bold text-neutral-900 dark:text-white truncate">
+                        {{ retailer.name }}
+                      </span>
+                      <span
+                        v-if="retailer.isLowestPrice"
+                        class="px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 shrink-0"
+                      >
+                        Best Price
+                      </span>
+                    </div>
+                    <div class="flex items-center gap-1 text-xs font-black text-neutral-900 dark:text-white shrink-0 ml-2">
+                      <span>${{ retailer.priceUSD }}</span>
+                      <svg class="w-3 h-3 text-neutral-400 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
               <!-- Available Colorways -->
               <div class="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-800">
                 <span class="text-neutral-400 block text-[10px] uppercase font-bold mb-2">

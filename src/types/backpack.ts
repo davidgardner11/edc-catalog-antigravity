@@ -11,6 +11,13 @@ export interface ReviewScore {
   reviewCount?: number;
 }
 
+export interface RetailerOffer {
+  name: string;
+  priceUSD: number;
+  url: string;
+  isLowestPrice?: boolean;
+}
+
 export interface BackpackItem {
   id: string;
   brand: string;
@@ -21,6 +28,7 @@ export interface BackpackItem {
   review: ReviewScore;
   colorways: BackpackColorway[];
   images: string[];
+  retailers?: RetailerOffer[];
   description?: string;
   material?: string;
   dimensions?: string;
