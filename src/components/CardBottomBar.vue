@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[35%] w-full grid grid-cols-3 divide-x divide-neutral-200 dark:divide-neutral-800 bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800 py-1.5 px-0.5 select-none">
+  <div class="h-[20%] w-full grid grid-cols-3 divide-x divide-neutral-200 dark:divide-neutral-800 bg-white dark:bg-neutral-900 py-1 px-0.5 select-none">
     <!-- Bottom Left <div>: 2x4 Color Swatches Grid -->
     <div class="h-full flex items-center justify-center overflow-hidden">
       <ColorGrid :colorways="backpack.colorways" />

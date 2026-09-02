@@ -11,13 +11,6 @@
       />
     </transition>
 
-    <!-- Persistent Brand & Model Label Overlay (top-left) with dynamic contrast font color -->
-    <CardLabelOverlay
-      :brand="brand"
-      :name="name"
-      :current-image="currentImage"
-    />
-
     <!-- Interactive Split-Click Navigation Zones (only active when images.length > 1) -->
     <template v-if="images.length > 1">
       <!-- Left 50% Click Zone: Previous Image (Infinite Loop) -->
@@ -61,7 +54,6 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import CardLabelOverlay from './CardLabelOverlay.vue'
 
 const props = defineProps<{
   images: string[]

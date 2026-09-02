@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-full w-full px-1">
+  <div class="flex flex-col items-center justify-center h-full w-full px-0.5">
     <!-- 2x4 Grid Container (2 rows, 4 columns = 8 slots) -->
-    <div class="grid grid-cols-4 grid-rows-2 gap-1.5 items-center justify-items-center w-full max-w-[100px]">
+    <div class="grid grid-cols-4 grid-rows-2 gap-1 items-center justify-items-center w-full max-w-[96px]">
       <!-- Render active page swatches -->
       <div
         v-for="(color, idx) in activeSwatches"
@@ -9,7 +9,7 @@
         class="group relative flex items-center justify-center"
       >
         <span
-          class="w-3.5 h-3.5 rounded-full border border-black/15 dark:border-white/20 shadow-sm transition-transform duration-150 hover:scale-125 cursor-pointer"
+          class="w-3 h-3 rounded-full border border-black/15 dark:border-white/20 shadow-xs transition-transform duration-150 hover:scale-125 cursor-pointer"
           :style="{ backgroundColor: color.hex }"
         />
         <!-- Tooltip on hover -->
@@ -29,7 +29,7 @@
         @click.stop="nextPage"
         title="View more colors"
         type="button"
-        class="w-3.5 h-3.5 rounded-full flex items-center justify-center bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-800 dark:text-neutral-200 text-[9px] font-black transition-all duration-150 hover:scale-115 active:scale-90 shadow-sm focus:outline-none cursor-pointer"
+        class="w-3 h-3 rounded-full flex items-center justify-center bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-800 dark:text-neutral-200 text-[8px] font-black transition-all duration-150 hover:scale-115 active:scale-90 shadow-xs focus:outline-none cursor-pointer leading-none"
       >
         <span>&gt;</span>
       </button>
@@ -38,7 +38,7 @@
       <div
         v-for="emptyIdx in emptySlotCount"
         :key="`empty-${emptyIdx}`"
-        class="w-3.5 h-3.5 rounded-full border border-dashed border-neutral-300 dark:border-neutral-700 opacity-30 flex items-center justify-center"
+        class="w-3 h-3 rounded-full border border-dashed border-neutral-300 dark:border-neutral-700 opacity-30 flex items-center justify-center"
       />
     </div>
   </div>
