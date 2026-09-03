@@ -37,10 +37,10 @@
         </button>
       </div>
 
-      <!-- Backpack Cards Grid -->
+      <!-- Backpack Cards Grid: 3 columns across on desktop, keeping identical interstitial gap -->
       <div
         v-if="filteredBackpacks.length > 0"
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 justify-items-center"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center"
       >
         <BackpackCard
           v-for="pack in filteredBackpacks"
