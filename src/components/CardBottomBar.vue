@@ -1,6 +1,6 @@
 <template>
   <div class="h-[20%] w-full grid grid-cols-3 divide-x divide-neutral-200 dark:divide-neutral-800 bg-white dark:bg-neutral-900 py-1 px-0.5 select-none overflow-visible">
-    <!-- Bottom Left <div>: 2x4 Color Swatches Grid -->
+    <!-- Bottom Left <div>: 3x3 Color Swatches Grid -->
     <div class="h-full flex items-center justify-center overflow-visible relative">
       <ColorGrid :colorways="backpack.colorways" />
     </div>

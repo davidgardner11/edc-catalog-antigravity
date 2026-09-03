@@ -46,12 +46,12 @@ for (const pack of backpacks) {
     }
   }
 
-  // 3. Test 2x4 Swatch Pagination Logic
+  // 3. Test 3x3 Swatch Pagination Logic
   const totalColors = pack.colorways.length;
-  const hasMultiplePages = totalColors > 8;
+  const hasMultiplePages = totalColors > 9;
   if (hasMultiplePages) {
     multiPagePacks++;
-    const totalPages = Math.ceil(totalColors / 7);
+    const totalPages = Math.ceil(totalColors / 8);
     if (totalPages < 2) {
       console.error(`❌ Multi-page pack ${pack.id} has invalid totalPages: ${totalPages}`);
       errors++;
@@ -60,7 +60,7 @@ for (const pack of backpacks) {
 }
 
 console.log(`✅ Verified ${totalImages} image assets on disk across 20 backpacks.`);
-console.log(`✅ Verified 2x4 swatch grid logic (${multiPagePacks} packs feature >8 colors with multi-page '>' pagination).`);
+console.log(`✅ Verified 3x3 swatch grid logic (${multiPagePacks} packs feature >9 colors with multi-page '>' pagination).`);
 
 // 4. Test Relative Luminance Math
 function srgbToLinear(val) {

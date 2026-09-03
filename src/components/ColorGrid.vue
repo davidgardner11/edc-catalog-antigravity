@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col items-center justify-center h-full w-full px-0.5 relative overflow-visible">
-    <!-- 2x4 Grid Container (2 rows, 4 columns = 8 slots) -->
-    <div class="grid grid-cols-4 grid-rows-2 gap-1 items-center justify-items-center w-full max-w-[96px] relative overflow-visible">
-      <!-- Render active page swatches -->
+    <!-- 3x3 Grid Container (3 rows, 3 columns = 9 slots) -->
+    <div class="grid grid-cols-3 grid-rows-3 gap-1 items-center justify-items-center w-full max-w-[72px] relative overflow-visible">
+      <!-- Render active page swatches (up to 8 swatches when paginated, or up to 9 when single-page) -->
       <div
         v-for="(color, idx) in activeSwatches"
         :key="`${currentPage}-${idx}-${color.name}`"
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <!-- If has pagination: Slot 8 is the interactive '>' More button -->
+      <!-- If has pagination: Slot 9 is the interactive '>' More button -->
       <button
         v-if="hasMultiplePages"
         @click.stop="nextPage"
@@ -37,7 +37,7 @@
         <span>&gt;</span>
       </button>
 
-      <!-- Empty wireframe placeholder circles for remaining slots to maintain exact 2x4 alignment -->
+      <!-- Empty wireframe placeholder circles for remaining slots to maintain exact 3x3 alignment -->
       <div
         v-for="emptyIdx in emptySlotCount"
         :key="`empty-${emptyIdx}`"
@@ -57,8 +57,8 @@ const props = defineProps<{
 
 const hoveredColor = ref<string | null>(null)
 const currentPage = ref(0)
-const TOTAL_SLOTS = 8
-const PAGE_SIZE_WITH_PAGINATION = 7
+const TOTAL_SLOTS = 9
+const PAGE_SIZE_WITH_PAGINATION = 8
 
 const totalColors = computed(() => props.colorways?.length || 0)
 const hasMultiplePages = computed(() => totalColors.value > TOTAL_SLOTS)
