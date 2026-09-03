@@ -1,25 +1,28 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-full w-full px-0.5">
+  <div class="flex flex-col items-center justify-center h-full w-full px-0.5 relative overflow-visible">
     <!-- 2x4 Grid Container (2 rows, 4 columns = 8 slots) -->
-    <div class="grid grid-cols-4 grid-rows-2 gap-1 items-center justify-items-center w-full max-w-[96px]">
+    <div class="grid grid-cols-4 grid-rows-2 gap-1 items-center justify-items-center w-full max-w-[96px] relative overflow-visible">
       <!-- Render active page swatches -->
       <div
         v-for="(color, idx) in activeSwatches"
         :key="`${currentPage}-${idx}-${color.name}`"
-        class="group relative flex items-center justify-center"
+        class="relative flex items-center justify-center"
+        @mouseenter="hoveredColor = color.name"
+        @mouseleave="hoveredColor = null"
       >
         <span
           class="w-3 h-3 rounded-full border border-black/15 dark:border-white/20 shadow-xs transition-transform duration-150 hover:scale-125 cursor-pointer"
           :style="{ backgroundColor: color.hex }"
         />
-        <!-- Tooltip on hover -->
+        <!-- Tooltip on hover: ONLY renders for the hovered color -->
         <div
-          class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:flex flex-col items-center z-40 pointer-events-none"
+          v-if="hoveredColor === color.name"
+          class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center z-50 pointer-events-none whitespace-nowrap"
         >
-          <div class="bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 text-[10px] font-semibold py-0.5 px-1.5 rounded shadow-lg whitespace-nowrap">
+          <div class="bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 text-[10px] font-semibold py-0.5 px-2 rounded-md shadow-xl whitespace-nowrap border border-white/10 dark:border-black/10">
             {{ color.name }}
           </div>
-          <div class="w-1 h-1 bg-neutral-900 dark:bg-neutral-100 rotate-45 -mt-0.5"></div>
+          <div class="w-1.5 h-1.5 bg-neutral-900 dark:bg-neutral-100 rotate-45 -mt-0.75 shadow-sm"></div>
         </div>
       </div>
 
@@ -52,6 +55,7 @@ const props = defineProps<{
   colorways: BackpackColorway[]
 }>()
 
+const hoveredColor = ref<string | null>(null)
 const currentPage = ref(0)
 const TOTAL_SLOTS = 8
 const PAGE_SIZE_WITH_PAGINATION = 7
@@ -80,6 +84,7 @@ const emptySlotCount = computed(() => {
 })
 
 const nextPage = () => {
+  hoveredColor.value = null
   currentPage.value = (currentPage.value + 1) % totalPages.value
 }
 </script>
