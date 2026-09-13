@@ -1,10 +1,8 @@
-# Top 20 EDC Backpacks — Everyday Carry Catalog
+# Top 20 EDC Backpacks — Everyday Carry Catalog App
 
-A single-page, static catalog of 20 curated Everyday Carry (EDC) backpacks, rendered as a deck of 5:7 poker-proportioned "playing cards." Each card has an image carousel, a title band, and a compact data bar (color swatches, lowest price + retailer, review score). Clicking a card opens a quick-view modal with full specs, all colorways, and direct links to retailers.
+A single-page application (SPA) static catalog of 20 curated Everyday Carry (EDC) backpacks. Each backpack card has an image carousel, a title band, and a data bar (color swatches, lowest price + retailer, review score). Clicking a card opens a quick-view modal with full specs, all colorways, and direct links to retailers.
 
-The project was scaffolded from an AI-generated implementation plan (see [`edc-catalog-app-antigravity-implementation-plan.md`](./edc-catalog-app-antigravity-implementation-plan.md)) and then iterated on. Note that the plan describes a Nuxt 3 SSG app with a 2×4 swatch grid; the codebase as built is a plain Vite + Vue 3 SPA with a 3×3 swatch grid. The README below describes what actually exists.
-
----
+The project was scaffolded from an AI-generated implementation plan (see [`edc-catalog-app-antigravity-implementation-plan.md`](./edc-catalog-app-antigravity-implementation-plan.md)) and then iterated on. During implementation and testing, some revisions occurred. The README below describes what functionality actually exists new.
 
 ## What the app does
 
@@ -21,8 +19,6 @@ The project was scaffolded from an AI-generated implementation plan (see [`edc-c
 
 All data is static and ships with the bundle; there is no backend, API call, or runtime fetch.
 
----
-
 ## Tech stack
 
 | Layer | Choice | Notes |
@@ -38,8 +34,6 @@ All data is static and ships with the bundle; there is no backend, API call, or 
 | Tooling scripts | Node ESM (`.mjs`) and Python 3 | Data/asset maintenance only, not part of the build |
 
 No test runner, linter, formatter, or CI configuration is present.
-
----
 
 ## Project structure
 
@@ -97,8 +91,6 @@ interface BackpackItem {
 
 "Featured" sort is simply the array order in `backpacks.json`. Rating sort normalises `score / maxScore` so 5-point and 10-point scales compare fairly.
 
----
-
 ## Setup
 
 Prerequisites: **Node.js 18+** (developed on Node 24 / npm 11). Python 3 is only needed for the optional data scripts.
@@ -136,8 +128,6 @@ These are one-shot utilities that were used to build the dataset. None are wired
 
 > **Back up `src/data/backpacks.json` before running any of the Python or `generate-assets` scripts** — they overwrite it in place.
 
----
-
 ## Known issues & bugs
 
 Found while reviewing the code and data. None break the build (`npm run build` and `verify-catalog.mjs` both pass).
@@ -154,8 +144,6 @@ Found while reviewing the code and data. None break the build (`npm run build` a
 10. **Image provenance.** Photos were scraped from Bing Image Search results, so licensing is unverified. Treat them as placeholders before any public deployment.
 11. **Static "live" pricing.** Prices and review scores are hard-coded snapshots; retailer URLs are unvalidated and several are guesses at product slugs.
 12. **Minor:** `brandList` includes the `'all'` sentinel and the navbar filters it back out; the footer hard-codes `© 2026`; the intro banner text says "poker card proportions" but is otherwise decorative.
-
----
 
 ## Recommended improvements
 
@@ -187,8 +175,6 @@ Roughly ordered by value-for-effort.
 - Add a GitHub Actions workflow: install → typecheck → build → verify → (optionally) deploy `dist/` to GitHub Pages.
 - Self-host the Inter font (or drop it) to remove the Google Fonts dependency and third-party request.
 - If the catalog grows past a few dozen items, consider SSG (Vite SSG or Nuxt, as the original plan intended) for per-pack routes and SEO.
-
----
 
 ## Design notes
 
