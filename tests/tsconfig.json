@@ -1,7 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "types": ["vitest", "@playwright/test"]
+    "types": ["node", "vitest", "@playwright/test"]
   },
   "include": ["./**/*.ts", "../src/**/*.d.ts"]
 }
