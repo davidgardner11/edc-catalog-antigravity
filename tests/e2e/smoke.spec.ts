@@ -61,7 +61,7 @@ test('clicking a card opens the detail modal and the close button dismisses it',
   await expect(modal(page).getByRole('heading', { level: 2, name: 'GR1 21L' })).toBeVisible()
   await expect(modal(page).getByText('21 Liters')).toBeVisible()
 
-  await modal(page).getByRole('button', { name: '✕', exact: true }).click()
+  await modal(page).getByRole('button', { name: 'Close details' }).click()
 
   await expect(modal(page)).toBeHidden()
   await expect(cards(page)).toHaveCount(TOTAL_BACKPACKS)

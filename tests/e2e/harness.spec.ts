@@ -147,7 +147,7 @@ test('modal opens for a non-first card and closes via the backdrop as well as th
   await expect(modal(page).getByRole('heading', { level: 2, name: target.name })).toBeVisible()
 
   // Close with the ✕ button.
-  await modal(page).getByRole('button', { name: '✕', exact: true }).click()
+  await modal(page).getByRole('button', { name: 'Close details' }).click()
   await expect(modal(page)).toBeHidden()
 
   // Reopen and close by clicking the backdrop (top-left corner is outside the dialog panel).
