@@ -24,6 +24,7 @@ if (backpacks.length !== 20) {
 // 2. Verify Card Data Structure & Image Files
 let totalImages = 0;
 let multiPagePacks = 0;
+let packsWithOffers = 0;
 
 for (const pack of backpacks) {
   if (!pack.id || !pack.brand || !pack.name || !pack.capacityLiters || !pack.lowestPriceUSD || !pack.primaryRetailer || !pack.review) {
@@ -46,7 +47,33 @@ for (const pack of backpacks) {
     }
   }
 
-  // 3. Test 3x3 Swatch Pagination Logic
+  // 3. Verify Best Price consistency (lowestPriceUSD / isLowestPrice vs retailers[])
+  if (Array.isArray(pack.retailers) && pack.retailers.length > 0) {
+    packsWithOffers++;
+    const minPrice = Math.min(...pack.retailers.map(r => r.priceUSD));
+
+    if (pack.lowestPriceUSD !== minPrice) {
+      console.error(`❌ Backpack ${pack.id} lowestPriceUSD is ${pack.lowestPriceUSD} but the cheapest retailer offer is ${minPrice}.`);
+      errors++;
+    }
+
+    for (const offer of pack.retailers) {
+      const shouldBeLowest = offer.priceUSD === minPrice;
+      if (Boolean(offer.isLowestPrice) !== shouldBeLowest) {
+        console.error(`❌ Backpack ${pack.id} retailer "${offer.name}" ($${offer.priceUSD}) has isLowestPrice=${Boolean(offer.isLowestPrice)} but the minimum price is $${minPrice}.`);
+        errors++;
+      }
+    }
+
+    const lowestOffer = pack.retailers.find(r => r.priceUSD === minPrice);
+    const expectedPrimary = lowestOffer.name.replace(/ \(Official\)$/, '');
+    if (pack.primaryRetailer !== expectedPrimary) {
+      console.error(`❌ Backpack ${pack.id} primaryRetailer is "${pack.primaryRetailer}" but the first lowest offer is "${lowestOffer.name}" (expected "${expectedPrimary}").`);
+      errors++;
+    }
+  }
+
+  // 4. Test 3x3 Swatch Pagination Logic
   const totalColors = pack.colorways.length;
   const hasMultiplePages = totalColors > 9;
   if (hasMultiplePages) {
@@ -60,6 +87,7 @@ for (const pack of backpacks) {
 }
 
 console.log(`✅ Verified ${totalImages} image assets on disk across 20 backpacks.`);
+console.log(`✅ Verified Best Price consistency across ${packsWithOffers} packs with retailer offers (lowestPriceUSD, isLowestPrice, primaryRetailer).`);
 console.log(`✅ Verified 3x3 swatch grid logic (${multiPagePacks} packs feature >9 colors with multi-page '>' pagination).`);
 
 // 4. Verify Static Assets Referenced by the App Shell & Components
