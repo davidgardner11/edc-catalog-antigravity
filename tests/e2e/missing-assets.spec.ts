@@ -152,7 +152,7 @@ test.describe('image placeholder (README issue #3)', () => {
     // No thumbnail strip.
     await expect(modal(page).locator('button.w-10.h-10')).toHaveCount(0)
 
-    await modal(page).getByRole('button', { name: '✕', exact: true }).click()
+    await modal(page).getByRole('button', { name: 'Close details' }).click()
     await expect(modal(page)).toBeHidden()
 
     // Opening a normal pack afterwards still shows its own images and thumbnails.
@@ -160,7 +160,7 @@ test.describe('image placeholder (README issue #3)', () => {
     await expect(modal(page)).toBeVisible()
     await expect(modal(page).locator('img.h-64')).toHaveAttribute('src', catalog[1].images[0])
     await expect(modal(page).locator('button.w-10.h-10')).toHaveCount(catalog[1].images.length)
-    await modal(page).getByRole('button', { name: '✕', exact: true }).click()
+    await modal(page).getByRole('button', { name: 'Close details' }).click()
     await expect(modal(page)).toBeHidden()
 
     await page.waitForLoadState('networkidle')

@@ -55,7 +55,10 @@ async function loadWithAppHeld(page: Page) {
     release: async () => {
       release()
       await continued
-      await page.unroute(APP_ENTRY)
+      // Deliberately no page.unroute() here: disabling interception while the
+      // module graph is still being fetched races Chromium's Fetch domain and can
+      // leave a just-issued request (vue.js, App.vue, main.css, ...) hung forever,
+      // so the app never mounts. Once released the handler simply continues.
     }
   }
 }
