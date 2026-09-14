@@ -24,6 +24,8 @@
           type="button"
           class="md:hidden p-2 rounded-lg text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
           title="Toggle Dark Mode"
+          aria-label="Toggle dark mode"
+          :aria-pressed="isDark"
         >
           <span v-if="isDark">☀️</span>
           <span v-else>🌙</span>
@@ -78,6 +80,8 @@
           type="button"
           class="hidden md:flex items-center justify-center w-8 h-8 rounded-lg border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all cursor-pointer text-sm"
           :title="isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
+          aria-label="Toggle dark mode"
+          :aria-pressed="isDark"
         >
           <span v-if="isDark">☀️</span>
           <span v-else>🌙</span>

@@ -5,6 +5,29 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Top 20 EDC Backpacks — Everyday Carry Catalog</title>
+    <!--
+      Apply the colour scheme before any stylesheet loads so there is no flash
+      of the wrong theme. Stored choice ("edc-theme": "dark" | "light") wins;
+      otherwise fall back to the OS preference. Kept in sync with
+      src/composables/useBackpackCatalog.ts.
+    -->
+    <script>
+      (function () {
+        var stored = null
+        try {
+          stored = window.localStorage.getItem('edc-theme')
+        } catch (e) {
+          // Storage can be unavailable (privacy mode, blocked cookies) — ignore.
+        }
+        var dark
+        if (stored === 'dark' || stored === 'light') {
+          dark = stored === 'dark'
+        } else {
+          dark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        }
+        document.documentElement.classList.toggle('dark', dark)
+      })()
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
