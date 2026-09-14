@@ -2,7 +2,7 @@
 
 A single-page application (SPA) static catalog of 20 curated Everyday Carry (EDC) backpacks. Each backpack card has an image carousel, a title band, and a data bar (color swatches, lowest price + retailer, review score). Clicking a card opens a quick-view modal with full specs, all colorways, and direct links to retailers.
 
-The project was scaffolded from an AI-generated implementation plan (see [`edc-catalog-app-antigravity-implementation-plan.md`](./edc-catalog-app-antigravity-implementation-plan.md)) and then iterated on. During implementation and testing, some revisions occurred. The README below describes what functionality actually exists new.
+The project was scaffolded from an AI-generated implementation plan (see [`implementation-plan.md`](./implementation-plan.md)) and then iterated on. During implementation and testing, some revisions occurred. The README below describes what functionality actually exists new.
 
 ## What the app does
 
@@ -142,7 +142,7 @@ No linter, formatter, or CI configuration is present.
 ├── scripts/                            # One-off data & asset tooling (see below)
 ├── vitest.config.ts · playwright.config.ts
 ├── tailwind.config.ts · postcss.config.js · vite.config.ts · tsconfig*.json
-└── edc-catalog-app-antigravity-implementation-plan.md   # Original design spec
+└── implementation-plan.md   # Original design spec
 ```
 
 ### Data model (`src/types/backpack.ts`)
