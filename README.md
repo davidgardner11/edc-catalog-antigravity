@@ -26,28 +26,28 @@ How a backpack goes from a curated pick to a card on screen. The first three sta
 
 ```mermaid
 flowchart TD
-    subgraph collect["1 · Collect"]
-        plan["Implementation plan<br/>Top-20 curated list"]
-        json0["src/data/backpacks.json<br/>id · brand · name · capacity<br/>price · review · colorways"]
-        bing["download-real-backpack-photos.py<br/>Bing Image Search scrape"]
-        jpgs["public/images/backpacks/&lt;id&gt;/1-5.jpg"]
+    subgraph collection["Stage 1 · Collection"]
+        plan["EDC Backpack List"]
+        json0["<code>src/data/backpacks.json</code><br/>id · brand · name · capacity · price · review · colorways"]
+        bing["<code>download-backpack-photos.py</code><br/>Bing - Image Search scrape"]
+        jpgs["<code>public/images/backpacks/&lt;id&gt;/1-5.jpg</code>"]
         plan --> json0
         json0 -- "brand + model queries" --> bing
         bing --> jpgs
-        bing -- "rewrites images[]" --> json0
+        bing -- "rewrites</br> <code>images[]</code>" --> json0
     end
 
-    subgraph enrich["2 · Enrich"]
-        retail["add-retailers-data.py<br/>hard-coded retailer map"]
-        json1["backpacks.json + retailers[]<br/>name · priceUSD · url · isLowestPrice"]
+    subgraph enrichment["Stage 2 · Enrichment"]
+        retail["<code>add-retailers-data.py</code><br/>hard-coded retailer map"]
+        json1["<code>backpacks.json + retailers[]</code><br/>name · priceUSD · url · isLowestPrice"]
         json0 --> retail --> json1
     end
 
-    subgraph prepare["3 · Prepare & verify"]
+    subgraph preparation["Stage 3 · Prep & Verify"]
         verify["npm run verify<br/>verify-catalog.mjs"]
         tests["npm test · npm run test:e2e<br/>Vitest + Playwright"]
         build["npm run build<br/>vue-tsc + vite build"]
-        dist["dist/<br/>static bundle + images"]
+        dist["<code>dist/</code><br/>static bundle + images"]
         json1 --> verify
         jpgs --> verify
         verify --> build
@@ -55,12 +55,12 @@ flowchart TD
         build --> dist
     end
 
-    subgraph present["4 · Present (browser runtime)"]
-        load["useBackpackCatalog()<br/>imports JSON at module load"]
-        norm["normalizeBackpack()<br/>derive lowestPriceUSD ·<br/>isLowestPrice · primaryRetailer"]
+    subgraph presention["Stage 4 · Presention (browser runtime)"]
+        load["<code>useBackpackCatalog()</code><br/>imports JSON at module load"]
+        norm["<code>normalizeBackpack()</code><br/>derive lowestPriceUSD ·<br/>isLowestPrice · primaryRetailer"]
         state["search · brand filter · sort<br/>dark-mode preference"]
         navbar["CatalogNavbar"]
-        grid["BackpackCard grid<br/>5:7 playing cards"]
+        grid["BackpackCard grid"]
         carousel["CardCarousel"]
         bar["CardBottomBar<br/>ColorGrid · PriceRetailer · ReviewScore"]
         modal["BackpackModal<br/>specs · Shop At · colorways"]
@@ -70,8 +70,8 @@ flowchart TD
         grid --> carousel
         grid --> bar
         grid -- "click / Enter" --> modal
-        jpgs -. "served from /images" .-> carousel
-        jpgs -. "served from /images" .-> modal
+        jpgs -. "served from</br> <code>/images</code>" .-> carousel
+        jpgs -. "served from</br> <code>/images</code>" .-> modal
     end
 
     classDef file fill:#f5f5f4,stroke:#a8a29e,color:#1c1917
@@ -84,10 +84,10 @@ flowchart TD
 
 Notes on the pipeline:
 
-- **Collect** — the 20 picks and their base specs were hand-authored from the implementation plan; photos were fetched by `download-real-backpack-photos.py`, which also rewrites each record's `images[]` to the downloaded JPG paths. (An earlier `generate-assets.mjs` step produced SVG placeholders; those have since been removed.)
-- **Enrich** — `add-retailers-data.py` merges a per-pack `retailers[]` array (name, price, URL, best-price flag) into the JSON.
-- **Prepare & verify** — `verify-catalog.mjs` checks record shape, that every referenced image and static asset exists on disk, and that `lowestPriceUSD` / `isLowestPrice` / `primaryRetailer` agree with the retailer offers. The unit and e2e suites pin behaviour; `vue-tsc` + Vite produce the static `dist/`.
-- **Present** — at runtime the JSON is imported statically, passed through `normalizeBackpack()` so the Best Price fields can never drift from `retailers[]`, then filtered/sorted by `useBackpackCatalog` and rendered by the card grid and modal. Nothing is fetched from a network at runtime except the images and the Inter font.
+- **Stage 1: Collection** — the 20 picks and their base specs were hand-authored from the implementation plan; photos were fetched by `download-backpack-photos.py`, which also rewrites each record's `images[]` to the downloaded JPG paths. (An earlier `generate-assets.mjs` step produced SVG placeholders; those have since been removed.)
+- **Stage 2: Enrichment** — `add-retailers-data.py` merges a per-pack `retailers[]` array (name, price, URL, best-price flag) into the JSON.
+- **Stage 3: Prep & verify** — `verify-catalog.mjs` checks record shape, that every referenced image and static asset exists on disk, and that `lowestPriceUSD` / `isLowestPrice` / `primaryRetailer` agree with the retailer offers. The unit and e2e suites pin behaviour; `vue-tsc` + Vite produce the static `dist/`.
+- **Stage 3: Presention** — at runtime the JSON is imported statically, passed through `normalizeBackpack()` so the Best Price fields can never drift from `retailers[]`, then filtered/sorted by `useBackpackCatalog` and rendered by the card grid and modal. Nothing is fetched from a network at runtime except the images and the Inter font.
 
 ## Tech stack
 
@@ -215,7 +215,7 @@ These are one-shot utilities that were used to build the dataset. Only `verify-c
 | `verify-catalog.mjs` | Read-only validation of `backpacks.json`, image files, Best Price consistency, and static assets (safe to run any time). |
 | `add-retailers-data.py` | Merges a hard-coded `retailers[]` map into `backpacks.json` and rewrites the file. |
 | `generate-assets.mjs` | Generates stylised placeholder SVGs per pack and **rewrites `images[]` to `.svg`** — running it now would revert the real photos. |
-| `download-real-backpack-photos.py` | Scrapes Bing Image Search for 5 photos per pack, saves them as JPGs, and rewrites `images[]`. Network-dependent and fragile. |
+| `download-backpack-photos.py` | Scrapes Bing Image Search for 5 photos per backpack, saves them as JPGs, and rewrites `images[]`. Network-dependent and fragile. |
 | `test-image-search.py`, `test-product-images.mjs` | Scratch experiments for the two image-sourcing approaches. |
 
 > **Back up `src/data/backpacks.json` before running any of the Python or `generate-assets` scripts** — they overwrite it in place.
