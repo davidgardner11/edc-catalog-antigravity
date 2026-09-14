@@ -20,6 +20,75 @@ The project was scaffolded from an AI-generated implementation plan (see [`edc-c
 
 All data is static and ships with the bundle; there is no backend, API call, or runtime fetch.
 
+## End-to-end data flow
+
+How a backpack goes from a curated pick to a card on screen. The first three stages are offline, one-shot steps that produce files committed to the repo; only the last stage runs in the browser.
+
+```mermaid
+flowchart TD
+    subgraph collect["1 · Collect"]
+        plan["Implementation plan<br/>Top-20 curated list"]
+        json0["src/data/backpacks.json<br/>id · brand · name · capacity<br/>price · review · colorways"]
+        bing["download-real-backpack-photos.py<br/>Bing Image Search scrape"]
+        jpgs["public/images/backpacks/&lt;id&gt;/1-5.jpg"]
+        plan --> json0
+        json0 -- "brand + model queries" --> bing
+        bing --> jpgs
+        bing -- "rewrites images[]" --> json0
+    end
+
+    subgraph enrich["2 · Enrich"]
+        retail["add-retailers-data.py<br/>hard-coded retailer map"]
+        json1["backpacks.json + retailers[]<br/>name · priceUSD · url · isLowestPrice"]
+        json0 --> retail --> json1
+    end
+
+    subgraph prepare["3 · Prepare & verify"]
+        verify["npm run verify<br/>verify-catalog.mjs"]
+        tests["npm test · npm run test:e2e<br/>Vitest + Playwright"]
+        build["npm run build<br/>vue-tsc + vite build"]
+        dist["dist/<br/>static bundle + images"]
+        json1 --> verify
+        jpgs --> verify
+        verify --> build
+        tests --> build
+        build --> dist
+    end
+
+    subgraph present["4 · Present (browser runtime)"]
+        load["useBackpackCatalog()<br/>imports JSON at module load"]
+        norm["normalizeBackpack()<br/>derive lowestPriceUSD ·<br/>isLowestPrice · primaryRetailer"]
+        state["search · brand filter · sort<br/>dark-mode preference"]
+        navbar["CatalogNavbar"]
+        grid["BackpackCard grid<br/>5:7 playing cards"]
+        carousel["CardCarousel"]
+        bar["CardBottomBar<br/>ColorGrid · PriceRetailer · ReviewScore"]
+        modal["BackpackModal<br/>specs · Shop At · colorways"]
+        dist --> load --> norm --> state
+        state <--> navbar
+        state --> grid
+        grid --> carousel
+        grid --> bar
+        grid -- "click / Enter" --> modal
+        jpgs -. "served from /images" .-> carousel
+        jpgs -. "served from /images" .-> modal
+    end
+
+    classDef file fill:#f5f5f4,stroke:#a8a29e,color:#1c1917
+    classDef script fill:#e0f2fe,stroke:#38bdf8,color:#0c4a6e
+    classDef runtime fill:#ecfdf5,stroke:#34d399,color:#064e3b
+    class json0,json1,jpgs,dist,plan file
+    class bing,retail,verify,tests,build script
+    class load,norm,state,navbar,grid,carousel,bar,modal runtime
+```
+
+Notes on the pipeline:
+
+- **Collect** — the 20 picks and their base specs were hand-authored from the implementation plan; photos were fetched by `download-real-backpack-photos.py`, which also rewrites each record's `images[]` to the downloaded JPG paths. (An earlier `generate-assets.mjs` step produced SVG placeholders; those have since been removed.)
+- **Enrich** — `add-retailers-data.py` merges a per-pack `retailers[]` array (name, price, URL, best-price flag) into the JSON.
+- **Prepare & verify** — `verify-catalog.mjs` checks record shape, that every referenced image and static asset exists on disk, and that `lowestPriceUSD` / `isLowestPrice` / `primaryRetailer` agree with the retailer offers. The unit and e2e suites pin behaviour; `vue-tsc` + Vite produce the static `dist/`.
+- **Present** — at runtime the JSON is imported statically, passed through `normalizeBackpack()` so the Best Price fields can never drift from `retailers[]`, then filtered/sorted by `useBackpackCatalog` and rendered by the card grid and modal. Nothing is fetched from a network at runtime except the images and the Inter font.
+
 ## Tech stack
 
 | Layer | Choice | Notes |
