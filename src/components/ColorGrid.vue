@@ -22,7 +22,7 @@
           class="rounded-full flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 dark:focus-visible:ring-offset-neutral-900"
         >
           <span
-            class="block w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full border border-black/15 dark:border-white/20 shadow-xs transition-transform duration-150 hover:scale-125"
+            class="block w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full border border-black/15 dark:border-white/20 shadow-sm transition-transform duration-150 hover:scale-125"
             :style="{ backgroundColor: color.hex }"
           />
         </button>
@@ -35,7 +35,7 @@
           <div class="bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 text-xs font-semibold py-1 px-2 rounded-md shadow-xl whitespace-nowrap border border-white/10 dark:border-black/10">
             {{ color.name }}
           </div>
-          <div class="w-1.5 h-1.5 bg-neutral-900 dark:bg-neutral-100 rotate-45 -mt-0.75 shadow-sm"></div>
+          <div class="w-1.5 h-1.5 bg-neutral-900 dark:bg-neutral-100 rotate-45 -mt-1 shadow-sm"></div>
         </div>
       </div>
 
@@ -46,7 +46,7 @@
         title="View more colors"
         aria-label="View more colors"
         type="button"
-        class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-800 dark:text-neutral-200 text-[9px] sm:text-[10px] font-black transition-all duration-150 hover:scale-115 active:scale-90 shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 dark:focus-visible:ring-offset-neutral-900 cursor-pointer leading-none"
+        class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-800 dark:text-neutral-200 text-[9px] sm:text-[10px] font-black transition-all duration-150 hover:scale-110 active:scale-90 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 dark:focus-visible:ring-offset-neutral-900 cursor-pointer leading-none"
       >
         <span aria-hidden="true">&gt;</span>
       </button>

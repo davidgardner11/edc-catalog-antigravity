@@ -107,7 +107,7 @@
                     :href="retailer.url"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="group flex items-center justify-between p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 hover:bg-neutral-100 dark:bg-neutral-800/60 dark:hover:bg-neutral-800 transition-all hover:border-neutral-300 dark:hover:border-neutral-700 cursor-pointer shadow-xs"
+                    class="group flex items-center justify-between p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 hover:bg-neutral-100 dark:bg-neutral-800/60 dark:hover:bg-neutral-800 transition-all hover:border-neutral-300 dark:hover:border-neutral-700 cursor-pointer shadow-sm"
                   >
                     <div class="flex items-center gap-1.5 min-w-0">
                       <span class="text-xs font-bold text-neutral-900 dark:text-white truncate">
