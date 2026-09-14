@@ -88,10 +88,10 @@ export function useBackpackCatalog() {
     if (getCurrentScope()) onScopeDispose(stopFollowingColorScheme)
   }
 
-  // Unique list of brands for dropdown filter
+  // Unique, alphabetically sorted list of brands for the dropdown filter
   const brandList = computed(() => {
     const brands = new Set(allBackpacks.value.map(b => b.brand))
-    return ['all', ...Array.from(brands).sort()]
+    return Array.from(brands).sort()
   })
 
   // Filtered and sorted backpacks

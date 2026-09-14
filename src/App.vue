@@ -21,7 +21,7 @@
             Everyday Carry Card Deck
           </h2>
           <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-            Displaying {{ filteredBackpacks.length }} of {{ allBackpacks.length }} acclaimed backpacks in standard 5:7 poker card proportions.
+            Displaying {{ filteredBackpacks.length }} of {{ allBackpacks.length }} curated everyday-carry backpacks.
           </p>
         </div>
 
@@ -81,7 +81,7 @@
     <!-- Footer -->
     <footer class="border-t border-neutral-200 dark:border-neutral-800 py-6 text-center text-xs text-neutral-400 dark:text-neutral-600">
       <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-        <span>© 2026 Everyday Carry (EDC) Backpack Catalog.</span>
+        <span>© {{ currentYear }} Everyday Carry (EDC) Backpack Catalog.</span>
         <span>Built with Vue 3, TypeScript, and Tailwind CSS.</span>
       </div>
     </footer>
@@ -109,4 +109,5 @@ const {
 } = useBackpackCatalog()
 
 const selectedPack = ref<BackpackItem | null>(null)
+const currentYear = new Date().getFullYear()
 </script>

@@ -56,7 +56,7 @@
           class="py-1.5 px-2.5 text-xs rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white transition-all cursor-pointer"
         >
           <option value="all">All Brands ({{ totalCount }})</option>
-          <option v-for="brand in brandList.filter(b => b !== 'all')" :key="brand" :value="brand">
+          <option v-for="brand in brandList" :key="brand" :value="brand">
             {{ brand }}
           </option>
         </select>

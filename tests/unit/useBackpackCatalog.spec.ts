@@ -40,11 +40,11 @@ describe('useBackpackCatalog', () => {
   })
 
   describe('brandList', () => {
-    it('starts with "all" followed by unique, alphabetically sorted brands', () => {
+    it('contains only unique, alphabetically sorted real brands (no "all" sentinel)', () => {
       const { brandList } = useBackpackCatalog()
-      const [first, ...brands] = brandList.value
+      const brands = brandList.value
 
-      expect(first).toBe('all')
+      expect(brands).not.toContain('all')
       expect(new Set(brands).size).toBe(brands.length)
       expect(brands).toEqual([...brands].sort())
       expect(new Set(brands)).toEqual(new Set(catalog.map(b => b.brand)))
