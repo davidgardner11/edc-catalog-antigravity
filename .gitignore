@@ -43,3 +43,8 @@ dist-ssr/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Test artifacts
+test-results/
+playwright-report/
+blob-report/
