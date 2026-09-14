@@ -40,8 +40,8 @@ describe('package.json scripts and devDependencies', () => {
     for (const name of ['vitest', '@vue/test-utils', '@playwright/test', 'jsdom', 'happy-dom']) {
       expect(runtime).not.toHaveProperty(name)
     }
-    // Runtime deps must be unchanged.
-    expect(Object.keys(runtime).sort()).toEqual(['lucide-vue-next', 'vue'])
+    // Vue is the only runtime dependency.
+    expect(Object.keys(runtime).sort()).toEqual(['vue'])
   })
 
   it('has the tooling resolved in package-lock.json so `npm ci` installs it', () => {

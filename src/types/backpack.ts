@@ -34,7 +34,6 @@ export interface BackpackItem {
   dimensions?: string;
   weightKg?: number;
   features?: string[];
-  contrastFallback?: '#FFFFFF' | '#000000';
 }
 
 export type SortOption = 'featured' | 'price-asc' | 'price-desc' | 'rating-desc' | 'capacity-desc' | 'brand-asc';
