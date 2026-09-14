@@ -62,7 +62,25 @@ for (const pack of backpacks) {
 console.log(`✅ Verified ${totalImages} image assets on disk across 20 backpacks.`);
 console.log(`✅ Verified 3x3 swatch grid logic (${multiPagePacks} packs feature >9 colors with multi-page '>' pagination).`);
 
-// 4. Test Relative Luminance Math
+// 4. Verify Static Assets Referenced by the App Shell & Components
+// index.html links /favicon.svg; CardCarousel.vue and BackpackModal.vue fall
+// back to the placeholder image whenever a pack has no images.
+const requiredAssets = [
+  { rel: 'favicon.svg', reason: 'linked from index.html <link rel="icon">' },
+  { rel: 'images/placeholder.webp', reason: 'image fallback in CardCarousel.vue / BackpackModal.vue' }
+];
+
+for (const asset of requiredAssets) {
+  const assetPath = path.join(publicDir, asset.rel);
+  if (!fs.existsSync(assetPath) || fs.statSync(assetPath).size === 0) {
+    console.error(`❌ Missing static asset: public/${asset.rel} (${asset.reason})`);
+    errors++;
+  } else {
+    console.log(`✅ Static asset present: public/${asset.rel}`);
+  }
+}
+
+// 5. Test Relative Luminance Math
 function srgbToLinear(val) {
   const norm = val / 255;
   return norm <= 0.03928 ? norm / 12.92 : Math.pow((norm + 0.055) / 1.055, 2.4);

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="EDC">
+  <!-- Mirrors the navbar logo tile: rounded neutral-900 square with bold white "EDC" -->
+  <rect width="64" height="64" rx="14" fill="#171717"/>
+  <text x="32" y="33" fill="#ffffff" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" font-weight="900" text-anchor="middle" dominant-baseline="central" letter-spacing="-0.5">EDC</text>
+</svg>

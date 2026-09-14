@@ -25,10 +25,10 @@
               :alt="backpack.name"
               class="w-full h-64 object-contain rounded-lg"
             />
-            <!-- Thumbnail selection -->
-            <div class="flex items-center gap-2 mt-4 overflow-x-auto max-w-full pb-1">
+            <!-- Thumbnail selection (omitted when the pack has no images) -->
+            <div v-if="modalImages.length > 0" class="flex items-center gap-2 mt-4 overflow-x-auto max-w-full pb-1">
               <button
-                v-for="(img, idx) in backpack.images"
+                v-for="(img, idx) in modalImages"
                 :key="img"
                 @click="activeImageIndex = idx"
                 type="button"
@@ -156,6 +156,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import type { BackpackItem } from '../types/backpack'
+import { PLACEHOLDER_IMAGE } from '../constants'
 
 const props = defineProps<{
   backpack: BackpackItem | null
@@ -171,8 +172,12 @@ watch(() => props.backpack, () => {
   activeImageIndex.value = 0
 })
 
+// Normalised image list so a pack with missing or empty images[] is safe to render.
+const modalImages = computed(() => props.backpack?.images ?? [])
+
 const activeModalImage = computed(() => {
   if (!props.backpack) return ''
-  return props.backpack.images[activeImageIndex.value] || props.backpack.images[0]
+  if (modalImages.value.length === 0) return PLACEHOLDER_IMAGE
+  return modalImages.value[activeImageIndex.value] || modalImages.value[0]
 })
 </script>

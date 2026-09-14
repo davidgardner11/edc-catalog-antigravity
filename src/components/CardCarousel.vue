@@ -54,6 +54,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { PLACEHOLDER_IMAGE } from '../constants'
 
 const props = defineProps<{
   images: string[]
@@ -65,7 +66,7 @@ const currentIndex = ref(0)
 
 const currentImage = computed(() => {
   if (!props.images || props.images.length === 0) {
-    return '/images/placeholder.webp'
+    return PLACEHOLDER_IMAGE
   }
   return props.images[currentIndex.value] || props.images[0]
 })
