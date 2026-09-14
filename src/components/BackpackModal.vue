@@ -6,15 +6,21 @@
       class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
     >
       <div
-        class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl relative my-8"
+        ref="dialogRef"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="backpack-modal-title"
+        tabindex="-1"
+        class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl relative my-8 focus:outline-none"
       >
         <!-- Close Button -->
         <button
           @click="$emit('close')"
           type="button"
-          class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300 flex items-center justify-center font-bold text-sm transition-colors cursor-pointer"
+          aria-label="Close details"
+          class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300 flex items-center justify-center font-bold text-sm transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
         >
-          ✕
+          <span aria-hidden="true">✕</span>
         </button>
 
         <div class="grid grid-cols-1 md:grid-cols-2">
@@ -46,7 +52,12 @@
               <span class="text-xs font-extrabold uppercase tracking-widest text-neutral-400">
                 {{ backpack.brand }}
               </span>
-              <h2 class="text-xl font-black text-neutral-900 dark:text-white mt-0.5">
+              <h2
+                id="backpack-modal-title"
+                ref="titleRef"
+                tabindex="-1"
+                class="text-xl font-black text-neutral-900 dark:text-white mt-0.5 focus:outline-none"
+              >
                 {{ backpack.name }}
               </h2>
               <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-2 leading-relaxed">
@@ -141,7 +152,8 @@
             <div class="mt-6">
               <button
                 @click="$emit('close')"
-                class="w-full py-2.5 px-4 rounded-xl bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-100 text-white dark:text-neutral-900 font-bold text-xs shadow-md transition-colors"
+                type="button"
+                class="w-full py-2.5 px-4 rounded-xl bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-100 text-white dark:text-neutral-900 font-bold text-xs shadow-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
               >
                 Back to Catalog
               </button>
@@ -154,7 +166,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, nextTick, onBeforeUnmount } from 'vue'
 import type { BackpackItem } from '../types/backpack'
 import { PLACEHOLDER_IMAGE } from '../constants'
 
@@ -162,14 +174,100 @@ const props = defineProps<{
   backpack: BackpackItem | null
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
 const activeImageIndex = ref(0)
+const dialogRef = ref<HTMLElement | null>(null)
+const titleRef = ref<HTMLElement | null>(null)
 
-watch(() => props.backpack, () => {
+// Element that had focus before the dialog opened; focus returns to it on close.
+let previouslyFocused: HTMLElement | null = null
+let previousBodyOverflow = ''
+
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])'
+].join(',')
+
+const getFocusable = (): HTMLElement[] => {
+  if (!dialogRef.value) return []
+  return Array.from(dialogRef.value.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR))
+    .filter(el => !el.closest('[hidden]'))
+}
+
+const lockScroll = () => {
+  previousBodyOverflow = document.body.style.overflow
+  document.body.style.overflow = 'hidden'
+}
+
+const unlockScroll = () => {
+  document.body.style.overflow = previousBodyOverflow
+}
+
+const onOpen = async () => {
+  previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null
+  lockScroll()
+  document.addEventListener('keydown', onKeydown)
+  await nextTick()
+  // Focus the (non-interactive) heading rather than the close button: when the
+  // dialog is opened with Enter, the key's activation would otherwise land on
+  // the freshly focused button and close it again immediately.
+  ;(titleRef.value ?? dialogRef.value)?.focus()
+}
+
+const onClose = () => {
+  document.removeEventListener('keydown', onKeydown)
+  unlockScroll()
+  const target = previouslyFocused
+  previouslyFocused = null
+  if (target && target.isConnected) target.focus()
+}
+
+const onKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Escape') {
+    event.preventDefault()
+    emit('close')
+    return
+  }
+  if (event.key !== 'Tab') return
+
+  // Trap Tab / Shift+Tab inside the dialog.
+  const focusable = getFocusable()
+  if (focusable.length === 0) {
+    event.preventDefault()
+    dialogRef.value?.focus()
+    return
+  }
+  const first = focusable[0]
+  const last = focusable[focusable.length - 1]
+  const active = document.activeElement
+  const inside = dialogRef.value?.contains(active) ?? false
+
+  if (event.shiftKey) {
+    if (!inside || active === first || active === dialogRef.value) {
+      event.preventDefault()
+      last.focus()
+    }
+  } else if (!inside || active === last) {
+    event.preventDefault()
+    first.focus()
+  }
+}
+
+watch(() => props.backpack, (next, prev) => {
   activeImageIndex.value = 0
+  if (next && !prev) onOpen()
+  else if (!next && prev) onClose()
+}, { immediate: true })
+
+onBeforeUnmount(() => {
+  if (props.backpack) onClose()
 })
 
 // Normalised image list so a pack with missing or empty images[] is safe to render.

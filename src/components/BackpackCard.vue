@@ -1,7 +1,12 @@
 <template>
   <div
+    role="button"
+    tabindex="0"
+    :aria-label="`View details for ${backpack.brand} ${backpack.name}`"
     @click="$emit('select', backpack)"
-    class="aspect-[5/7] min-w-[260px] max-w-[420px] w-full rounded-xl overflow-hidden border border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-900 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 flex flex-col cursor-pointer relative group"
+    @keydown.enter.self="$emit('select', backpack)"
+    @keydown.space.self.prevent="$emit('select', backpack)"
+    class="aspect-[5/7] min-w-[260px] max-w-[420px] w-full rounded-xl overflow-hidden border border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-900 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 flex flex-col cursor-pointer relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-950"
   >
     <!-- Top 65% of the card: Infinite Image Carousel (Unobstructed) -->
     <CardCarousel

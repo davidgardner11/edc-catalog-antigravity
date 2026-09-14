@@ -7,16 +7,29 @@
         v-for="(color, idx) in activeSwatches"
         :key="`${currentPage}-${idx}-${color.name}`"
         class="relative flex items-center justify-center"
-        @mouseenter="hoveredColor = color.name"
-        @mouseleave="hoveredColor = null"
+        @mouseenter="onMouseEnter(color.name)"
+        @mouseleave="onMouseLeave"
+        @touchstart.passive="touchInteraction = true"
+        @touchmove.passive="touchInteraction = false"
+        @touchcancel="touchInteraction = false"
       >
-        <span
-          class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full border border-black/15 dark:border-white/20 shadow-xs transition-transform duration-150 hover:scale-125 cursor-pointer"
-          :style="{ backgroundColor: color.hex }"
-        />
-        <!-- Tooltip on hover: ONLY renders for the hovered color -->
+        <button
+          type="button"
+          :aria-label="color.name"
+          @click.stop="toggleTooltip(color.name)"
+          @focus="onFocus(color.name)"
+          @blur="onBlur"
+          class="rounded-full flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 dark:focus-visible:ring-offset-neutral-900"
+        >
+          <span
+            class="block w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full border border-black/15 dark:border-white/20 shadow-xs transition-transform duration-150 hover:scale-125"
+            :style="{ backgroundColor: color.hex }"
+          />
+        </button>
+        <!-- Tooltip on hover/focus/tap: ONLY renders for the active color -->
         <div
           v-if="hoveredColor === color.name"
+          role="tooltip"
           class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center z-50 pointer-events-none whitespace-nowrap"
         >
           <div class="bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 text-xs font-semibold py-1 px-2 rounded-md shadow-xl whitespace-nowrap border border-white/10 dark:border-black/10">
@@ -31,10 +44,11 @@
         v-if="hasMultiplePages"
         @click.stop="nextPage"
         title="View more colors"
+        aria-label="View more colors"
         type="button"
-        class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-800 dark:text-neutral-200 text-[9px] sm:text-[10px] font-black transition-all duration-150 hover:scale-115 active:scale-90 shadow-xs focus:outline-none cursor-pointer leading-none"
+        class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-800 dark:text-neutral-200 text-[9px] sm:text-[10px] font-black transition-all duration-150 hover:scale-115 active:scale-90 shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 dark:focus-visible:ring-offset-neutral-900 cursor-pointer leading-none"
       >
-        <span>&gt;</span>
+        <span aria-hidden="true">&gt;</span>
       </button>
 
       <!-- Empty wireframe placeholder circles for remaining slots to maintain exact 3x3 alignment -->
@@ -55,7 +69,11 @@ const props = defineProps<{
   colorways: BackpackColorway[]
 }>()
 
+// Name of the colorway whose tooltip is showing (hover, focus, or tap).
 const hoveredColor = ref<string | null>(null)
+// Set on touchstart so the emulated mouseenter/focus a tap fires do not
+// pre-empt the click toggle; cleared once the click has been handled.
+const touchInteraction = ref(false)
 const currentPage = ref(0)
 const TOTAL_SLOTS = 9
 const PAGE_SIZE_WITH_PAGINATION = 8
@@ -82,6 +100,32 @@ const emptySlotCount = computed(() => {
   const renderedItems = activeSwatches.value.length + (hasMultiplePages.value ? 1 : 0)
   return Math.max(0, TOTAL_SLOTS - renderedItems)
 })
+
+const onMouseEnter = (name: string) => {
+  if (touchInteraction.value) return
+  hoveredColor.value = name
+}
+
+const onMouseLeave = () => {
+  if (touchInteraction.value) return
+  hoveredColor.value = null
+}
+
+const onFocus = (name: string) => {
+  if (touchInteraction.value) return
+  hoveredColor.value = name
+}
+
+const onBlur = () => {
+  if (touchInteraction.value) return
+  hoveredColor.value = null
+}
+
+// Click / tap / Enter toggles the tooltip so it is reachable on touch devices.
+const toggleTooltip = (name: string) => {
+  hoveredColor.value = hoveredColor.value === name ? null : name
+  touchInteraction.value = false
+}
 
 const nextPage = () => {
   hoveredColor.value = null
