@@ -30,8 +30,42 @@ function applyTheme(dark: boolean) {
   document.documentElement.classList.toggle('dark', dark)
 }
 
+const OFFICIAL_SUFFIX = / \(Official\)$/
+
+/** Label shown on the card, e.g. "Tom Bihn (Official)" -> "Tom Bihn". */
+function retailerLabel(name: string): string {
+  return name.replace(OFFICIAL_SUFFIX, '')
+}
+
+/**
+ * Derives the price fields from `retailers[]` so the JSON can never disagree
+ * with itself: lowestPriceUSD is the minimum offer price, isLowestPrice is
+ * true exactly for offers at that price, and primaryRetailer is the first
+ * lowest offer. Items without retailer offers are returned unchanged.
+ */
+export function normalizeBackpack(item: BackpackItem): BackpackItem {
+  const retailers = item.retailers
+  if (!retailers || retailers.length === 0) return item
+
+  const lowestPriceUSD = Math.min(...retailers.map(r => r.priceUSD))
+  const normalizedRetailers = retailers.map(r => ({
+    ...r,
+    isLowestPrice: r.priceUSD === lowestPriceUSD
+  }))
+  const primary = normalizedRetailers.find(r => r.isLowestPrice) ?? normalizedRetailers[0]
+
+  return {
+    ...item,
+    lowestPriceUSD,
+    primaryRetailer: retailerLabel(primary.name),
+    retailers: normalizedRetailers
+  }
+}
+
+const normalizedData = (rawData as BackpackItem[]).map(normalizeBackpack)
+
 export function useBackpackCatalog() {
-  const allBackpacks = ref<BackpackItem[]>(rawData as BackpackItem[])
+  const allBackpacks = ref<BackpackItem[]>(normalizedData)
   const searchQuery = ref('')
   const selectedBrand = ref('all')
   const sortBy = ref<SortOption>('featured')

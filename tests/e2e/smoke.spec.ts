@@ -66,3 +66,22 @@ test('clicking a card opens the detail modal and the close button dismisses it',
   await expect(modal(page)).toBeHidden()
   await expect(cards(page)).toHaveCount(TOTAL_BACKPACKS)
 })
+
+test('modal badges the cheapest retailer as Best Price (Tom Bihn Synik 22)', async ({ page }) => {
+  await searchInput(page).fill('Synik')
+  await cards(page).first().getByRole('heading', { level: 3 }).click()
+  await expect(modal(page)).toBeVisible()
+
+  // Retailer offers are the external links inside the "Shop At" section.
+  const offers = modal(page).locator('a[target="_blank"]')
+  await expect(offers).toHaveCount(2)
+
+  const official = offers.filter({ hasText: 'Tom Bihn (Official)' })
+  const carryology = offers.filter({ hasText: 'Carryology Marketplace' })
+
+  await expect(carryology).toContainText('$320')
+  await expect(carryology.getByText('Best Price')).toBeVisible()
+  await expect(official).toContainText('$340')
+  await expect(official.getByText('Best Price')).toHaveCount(0)
+  await expect(modal(page).getByText('Best Price')).toHaveCount(1)
+})
