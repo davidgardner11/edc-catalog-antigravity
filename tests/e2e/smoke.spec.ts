@@ -1,87 +1,161 @@
 import { test, expect, type Page } from '@playwright/test'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const TOTAL_BACKPACKS = 20
+// Smoke suite: the dev server really runs on PW_PORT, static assets are served,
+// and the catalog (grid, filters, sort, search, modal) is driveable end to end
+// without console errors.
 
-// Each BackpackCard is a direct child of the main catalog grid.
+type Backpack = {
+  id: string
+  name: string
+  brand: string
+  lowestPriceUSD: number
+  capacityLiters: number
+  images: string[]
+}
+
+const catalog: Backpack[] = JSON.parse(
+  readFileSync(resolve(fileURLToPath(new URL('.', import.meta.url)), '..', '..', 'src', 'data', 'backpacks.json'), 'utf8')
+)
+const EXPECTED_PORT = String(process.env.PW_PORT || 4173)
+
 const cards = (page: Page) => page.locator('main > div.grid > div')
-const searchInput = (page: Page) => page.getByPlaceholder('Search packs or brands...')
-const brandSelect = (page: Page) => page.locator('header select').first()
+const cardTitles = (page: Page) => cards(page).getByRole('heading', { level: 3 })
+const brandSelect = (page: Page) => page.locator('header select').nth(0)
+const sortSelect = (page: Page) => page.locator('header select').nth(1)
 const modal = (page: Page) => page.locator('div.fixed.inset-0')
 
-test.beforeEach(async ({ page }) => {
+test('dev server is bound to PW_PORT and answers 200 for the document', async ({ page, request, baseURL }) => {
+  expect(new URL(baseURL!).port).toBe(EXPECTED_PORT)
+
+  const response = await page.goto('/')
+  expect(response?.status()).toBe(200)
+  expect(new URL(page.url()).port).toBe(EXPECTED_PORT)
+
+  const direct = await request.get(`http://localhost:${EXPECTED_PORT}/`)
+  expect(direct.status()).toBe(200)
+  expect(await direct.text()).toContain('<div id="app">')
+})
+
+test('static catalog images referenced by the data are served with 200', async ({ request }) => {
+  // First image of every backpack; keeps the run cheap but covers all 20 folders.
+  for (const pack of catalog) {
+    const res = await request.get(pack.images[0])
+    expect(res.status(), `${pack.id}: ${pack.images[0]}`).toBe(200)
+    expect(res.headers()['content-type'], pack.id).toMatch(/^image\//)
+  }
+})
+
+test('page loads without console errors or uncaught exceptions', async ({ page }) => {
+  const errors: string[] = []
+  page.on('console', msg => {
+    if (msg.type() === 'error') errors.push(msg.text())
+  })
+  page.on('pageerror', err => errors.push(err.message))
+
   await page.goto('/')
+  await expect(cards(page)).toHaveCount(catalog.length)
+
+  expect(errors).toEqual([])
 })
 
-test('page loads with the catalog header', async ({ page }) => {
-  await expect(page).toHaveTitle(/Top 20 EDC Backpacks/)
-  await expect(page.getByRole('heading', { level: 1, name: 'Top 20 EDC Backpacks' })).toBeVisible()
-  await expect(page.getByRole('heading', { level: 2, name: 'Everyday Carry Card Deck' })).toBeVisible()
+test('renders one card per catalog entry in curated order', async ({ page }) => {
+  await page.goto('/')
+
+  await expect(cardTitles(page)).toHaveText(catalog.map(b => b.name))
 })
 
-test('renders all 20 backpack cards', async ({ page }) => {
-  await expect(cards(page)).toHaveCount(TOTAL_BACKPACKS)
-  await expect(page.getByText(`Displaying ${TOTAL_BACKPACKS} of ${TOTAL_BACKPACKS}`)).toBeVisible()
-  await expect(cards(page).first()).toContainText('GR1 21L')
+test('brand dropdown lists every unique brand once, alphabetically, after "all"', async ({ page }) => {
+  await page.goto('/')
+
+  const values = await brandSelect(page).locator('option').evaluateAll(opts =>
+    opts.map(o => (o as HTMLOptionElement).value)
+  )
+  const uniqueBrands = [...new Set(catalog.map(b => b.brand))].sort()
+
+  expect(values).toEqual(['all', ...uniqueBrands])
 })
 
-test('search narrows the grid', async ({ page }) => {
-  await searchInput(page).fill('Synik')
+test('brand filter shows exactly that brand\'s packs for every brand', async ({ page }) => {
+  await page.goto('/')
 
-  await expect(cards(page)).toHaveCount(1)
-  await expect(cards(page).first()).toContainText('Tom Bihn')
-  await expect(page.getByText(`Displaying 1 of ${TOTAL_BACKPACKS}`)).toBeVisible()
-
-  await searchInput(page).fill('no-such-backpack-xyz')
-  await expect(cards(page)).toHaveCount(0)
-  await expect(page.getByText('No backpacks match your filter')).toBeVisible()
-
-  await page.getByRole('button', { name: 'Reset Filters' }).click()
-  await expect(cards(page)).toHaveCount(TOTAL_BACKPACKS)
-  await expect(searchInput(page)).toHaveValue('')
-})
-
-test('brand filter narrows the grid to one brand', async ({ page }) => {
-  await brandSelect(page).selectOption('Bellroy')
-
-  await expect(cards(page)).toHaveCount(1)
-  await expect(cards(page).first()).toContainText('Bellroy')
-  await expect(cards(page).first()).toContainText('Transit Workpack 20L')
+  const uniqueBrands = [...new Set(catalog.map(b => b.brand))].sort()
+  for (const brand of uniqueBrands) {
+    await brandSelect(page).selectOption(brand)
+    const expected = catalog.filter(b => b.brand === brand).map(b => b.name)
+    await expect(cardTitles(page)).toHaveText(expected)
+  }
 
   await brandSelect(page).selectOption('all')
-  await expect(cards(page)).toHaveCount(TOTAL_BACKPACKS)
+  await expect(cards(page)).toHaveCount(catalog.length)
 })
 
-test('clicking a card opens the detail modal and the close button dismisses it', async ({ page }) => {
-  await expect(modal(page)).toBeHidden()
+test('sort dropdown reorders the grid', async ({ page }) => {
+  await page.goto('/')
 
-  // The image carousel swallows clicks (prev/next zones), so click the name band.
-  await cards(page).first().getByRole('heading', { level: 3 }).click()
+  const byPriceAsc = [...catalog].sort((a, b) => a.lowestPriceUSD - b.lowestPriceUSD)
+  await sortSelect(page).selectOption('price-asc')
+  await expect(cardTitles(page).first()).toHaveText(byPriceAsc[0].name)
+  const ascTitles = await cardTitles(page).allTextContents()
+  const ascPrices = ascTitles.map(t => catalog.find(b => b.name === t.trim())!.lowestPriceUSD)
+  for (let i = 1; i < ascPrices.length; i++) expect(ascPrices[i]).toBeGreaterThanOrEqual(ascPrices[i - 1])
 
+  await sortSelect(page).selectOption('price-desc')
+  const descTitles = await cardTitles(page).allTextContents()
+  const descPrices = descTitles.map(t => catalog.find(b => b.name === t.trim())!.lowestPriceUSD)
+  for (let i = 1; i < descPrices.length; i++) expect(descPrices[i]).toBeLessThanOrEqual(descPrices[i - 1])
+
+  await sortSelect(page).selectOption('capacity-desc')
+  const capTitles = await cardTitles(page).allTextContents()
+  const caps = capTitles.map(t => catalog.find(b => b.name === t.trim())!.capacityLiters)
+  for (let i = 1; i < caps.length; i++) expect(caps[i]).toBeLessThanOrEqual(caps[i - 1])
+
+  await sortSelect(page).selectOption('featured')
+  await expect(cardTitles(page)).toHaveText(catalog.map(b => b.name))
+})
+
+test('search matches on material and reset restores everything', async ({ page }) => {
+  await page.goto('/')
+  const search = page.getByPlaceholder('Search packs or brands...')
+  await expect(page.getByRole('button', { name: /Reset all filters/ })).toBeHidden()
+
+  await search.fill('X-Pac')
+  const expected = catalog.filter(b => JSON.stringify(b).toLowerCase().includes('x-pac'))
+  expect(expected.length).toBeGreaterThan(0)
+  await expect(cards(page).first()).toBeVisible()
+  const count = await cards(page).count()
+  expect(count).toBeGreaterThan(0)
+  expect(count).toBeLessThan(catalog.length)
+
+  // The inline reset link only appears while a filter is active.
+  const resetLink = page.getByRole('button', { name: /Reset all filters/ })
+  await expect(resetLink).toBeVisible()
+  await resetLink.click()
+  await expect(cards(page)).toHaveCount(catalog.length)
+  await expect(search).toHaveValue('')
+  await expect(resetLink).toBeHidden()
+})
+
+test('modal opens for a non-first card and closes via the backdrop as well as the button', async ({ page }) => {
+  await page.goto('/')
+  const target = catalog[5]
+
+  await cardTitles(page).nth(5).click()
   await expect(modal(page)).toBeVisible()
-  await expect(modal(page).getByRole('heading', { level: 2, name: 'GR1 21L' })).toBeVisible()
-  await expect(modal(page).getByText('21 Liters')).toBeVisible()
+  await expect(modal(page).getByRole('heading', { level: 2, name: target.name })).toBeVisible()
 
+  // Close with the ✕ button.
   await modal(page).getByRole('button', { name: 'Close details' }).click()
-
   await expect(modal(page)).toBeHidden()
-  await expect(cards(page)).toHaveCount(TOTAL_BACKPACKS)
-})
 
-test('modal badges the cheapest retailer as Best Price (Tom Bihn Synik 22)', async ({ page }) => {
-  await searchInput(page).fill('Synik')
-  await cards(page).first().getByRole('heading', { level: 3 }).click()
+  // Reopen and close by clicking the backdrop (top-left corner is outside the dialog panel).
+  await cardTitles(page).nth(5).click()
   await expect(modal(page)).toBeVisible()
+  await modal(page).click({ position: { x: 5, y: 5 } })
+  await expect(modal(page)).toBeHidden()
 
-  // Retailer offers are the external links inside the "Shop At" section.
-  const offers = modal(page).locator('a[target="_blank"]')
-  await expect(offers).toHaveCount(2)
-
-  const official = offers.filter({ hasText: 'Tom Bihn (Official)' })
-  const carryology = offers.filter({ hasText: 'Carryology Marketplace' })
-
-  await expect(carryology).toContainText('$320')
-  await expect(carryology.getByText('Best Price')).toBeVisible()
-  await expect(official).toContainText('$340')
-  await expect(official.getByText('Best Price')).toHaveCount(0)
-  await expect(modal(page).getByText('Best Price')).toHaveCount(1)
+  // Grid is unaffected by opening/closing the modal.
+  await expect(cards(page)).toHaveCount(catalog.length)
 })

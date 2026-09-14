@@ -7,6 +7,7 @@ import { resolve, join } from 'node:path'
 import { tmpdir } from 'node:os'
 import CardCarousel from '@/components/CardCarousel.vue'
 import BackpackModal from '@/components/BackpackModal.vue'
+import { PLACEHOLDER_IMAGE } from '@/constants'
 import type { BackpackItem } from '@/types/backpack'
 
 // Acceptance tests for README issues #2 + #3 (task: fix/missing-assets):
@@ -74,6 +75,10 @@ describe('placeholder asset (README issue #3)', () => {
     expect(bytes.subarray(8, 12).toString('ascii')).toBe('WEBP')
     // RIFF chunk size must match the file length (guards against a truncated encode).
     expect(bytes.readUInt32LE(4) + 8).toBe(bytes.length)
+  })
+
+  it('the shared PLACEHOLDER_IMAGE constant points at the file on disk', () => {
+    expect(PLACEHOLDER_IMAGE).toBe(PLACEHOLDER_PATH)
   })
 
   it('CardCarousel and BackpackModal use the same placeholder path', () => {
