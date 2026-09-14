@@ -570,13 +570,13 @@
         "name": "Tom Bihn (Official)",
         "priceUSD": 340,
         "url": "https://www.tombihn.com/products/synik-22",
-        "isLowestPrice": true
+        "isLowestPrice": false
       },
       {
         "name": "Carryology Marketplace",
         "priceUSD": 320,
         "url": "https://www.carryology.com/",
-        "isLowestPrice": false
+        "isLowestPrice": true
       }
     ]
   },
